@@ -1,24 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { useQuery } from "react-query";
+import { useEffect } from "react";
 
 function App() {
+  //  useform hook
+  const { register, handleSubmit } = useForm();
+
+  // post 요청 함수
+  async function login(data) {
+    try {
+      //응답 성공
+      const response = await axios.post("/api/auth/login", data);
+      console.log(response);
+    } catch (error) {
+      //응답 실패
+      console.error(error);
+    }
+  }
+
+  // onsubmit 함수
+  const onSubmit = (data) => {
+    const user = { ...data };
+    console.log(user);
+    login(user);
+  };
+
+  // get 요청
+  const { data } = useQuery(
+    "health",
+    async () => {
+      const response = await fetch(`/api/health`);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      console.log("healthdata", data);
+      return data;
+    },
+    {
+      retry: 0,
+    }
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          placeholder="id"
+          {...register("username", { required: true })}
+        ></input>
+        <input
+          placeholder="password"
+          type="password"
+          {...register("password", { required: true })}
+        ></input>
+        <button type="submit">로그인</button>
+      </form>
+    </>
   );
 }
 
