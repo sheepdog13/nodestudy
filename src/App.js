@@ -1,9 +1,10 @@
 import "./App.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useEffect } from "react";
 
+// git commit 템플릿 설정
 function App() {
   //  useform hook
   const { register, handleSubmit } = useForm();
@@ -27,22 +28,22 @@ function App() {
     login(user);
   };
 
-  // get 요청
-  const { data } = useQuery(
-    "health",
-    async () => {
-      const response = await fetch(`/api/health`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      console.log("healthdata", data);
-      return data;
-    },
-    {
-      retry: 0,
-    }
-  );
+  // get 요청 로그인후에 받아올수 있게 만들기
+  // const { data } = useQuery(
+  //   "health",
+  //   async () => {
+  //     const response = await fetch(`/api/health`);
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok");
+  //     }
+  //     const data = await response.json();
+  //     console.log("healthdata", data);
+  //     return data;
+  //   },
+  //   {
+  //     retry: 0,
+  //   }
+  // );
 
   return (
     <>
