@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = 4000;
 const bodyParser = require("body-parser");
+const config = require("./config/key");
 const { User } = require("./models/User");
 
 // application/x-www-form-urlencoded 이렇게된 데이터를 분석해서 가져올 수 있게 해준다.
@@ -12,9 +13,7 @@ app.use(bodyParser.json());
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    "mongodb+srv://sheepdog13:abcd1234@cluster0.td5s7g6.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(config.mongoURI)
   .then(() => console.log("mongodb connected"))
   .catch((err) => console.log(err));
 
