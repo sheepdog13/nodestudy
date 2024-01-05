@@ -73,14 +73,6 @@ userSchema.methods.generateToken = async function (cb) {
   var token = jwt.sign(user._id.toHexString(), "secretToken");
   // user._id(db의 _id) + secreToken = token
   // token으로 user를 판별할 수 있다.
-  // const result = await user
-  //   .save()
-  //   .then(() => {
-  //     return cb(null, user);
-  //   })
-  //   .catch((err) => {
-  //     return cb(err);
-  //   });
   // user.token = token;
   // user.save(function (err, user) {
   //   if (err) return cb(err);
