@@ -42,6 +42,7 @@ app.post("/register", async (req, res) => {
 
 app.post("/api/users/login", async (req, res) => {
   try {
+    // 같은 이메일의 유저가 있는지 확인
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
@@ -51,8 +52,8 @@ app.post("/api/users/login", async (req, res) => {
       });
     }
 
+    // 비밀번호 확인
     const isMatch = await user.comparePassword(req.body.password);
-    console.log(isMatch);
     if (!isMatch) {
       return res.json({
         loginSuccess: false,
@@ -60,12 +61,15 @@ app.post("/api/users/login", async (req, res) => {
       });
     }
 
-    // const token = await user.generateToken();
-
-    // // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지
-    // res.cookie("x_auth", token).status(200).json({ loginSuccess: true });
+    // 토큰 쿠키에 저장
+    const userdata = await user.generateToken();
+    // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지
+    res
+      .cookie("x_auth", userdata.token)
+      .status(200)
+      .json({ loginSuccess: true, userId: userdata._id });
   } catch (err) {
-    return res.status(400).json({ loginSuccess: false, err });
+    return res.status(400).send(err);
   }
 });
 

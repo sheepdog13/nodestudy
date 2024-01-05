@@ -59,7 +59,6 @@ userSchema.pre("save", function (next) {
 
 // 비밀번호 비교 정적 메서드
 userSchema.methods.comparePassword = function (plainPassword) {
-  console.log("작동했습니다");
   // plainpassword와 db에 암호화된 비밀번호가 같은지 확인
   const result = bcrypt.compare(plainPassword, this.password);
   return result;
@@ -68,23 +67,18 @@ userSchema.methods.comparePassword = function (plainPassword) {
 // 토큰 발급 정적 메서드
 userSchema.methods.generateToken = async function (cb) {
   var user = this;
-
   // jsonwebtoken을 이용해서 token을 생성하기
   var token = jwt.sign(user._id.toHexString(), "secretToken");
   // user._id(db의 _id) + secreToken = token
   // token으로 user를 판별할 수 있다.
   // user.token = token;
-  // user.save(function (err, user) {
-  //   if (err) return cb(err);
-  //   cb(null, user);
-  // });
   user.token = token;
 
   try {
     const savedUser = await user.save();
-    cb(null, savedUser);
+    return user;
   } catch (err) {
-    cb(err);
+    return err;
   }
 };
 
