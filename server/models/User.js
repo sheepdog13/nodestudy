@@ -57,14 +57,14 @@ userSchema.pre("save", function (next) {
   }
 });
 
-// 비밀번호 비교 정적 메서드
+// 비밀번호 비교 메서드
 userSchema.methods.comparePassword = function (plainPassword) {
   // plainpassword와 db에 암호화된 비밀번호가 같은지 확인
   const result = bcrypt.compare(plainPassword, this.password);
   return result;
 };
 
-// 토큰 발급 정적 메서드
+// 토큰 발급 메서드
 userSchema.methods.generateToken = async function (cb) {
   var user = this;
   // jsonwebtoken을 이용해서 token을 생성하기
@@ -80,6 +80,25 @@ userSchema.methods.generateToken = async function (cb) {
   } catch (err) {
     return err;
   }
+};
+
+userSchema.statics.findByToken = function (token) {
+  var user = this;
+  // 코인을 decode 한다.
+  jwt.verify(token, "secretToken", async function (err, decoded) {
+    // 복호화된 토큰에서 user_id와 같은 유저 찾기
+    try {
+      const user = await user.findOne({ _id: decoded, token: token });
+      return user;
+    } catch (err) {
+      return err;
+    }
+    // user.findOne({ _id: decoded, token: token }, function (err, user) {
+    //   if (err) return cb(err);
+    //   console.log("userschema", user);
+    //   cb(null, user);
+    // });
+  });
 };
 
 const User = mongoose.model("User", userSchema);
