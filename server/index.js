@@ -76,7 +76,7 @@ app.post("/api/users/login", async (req, res) => {
 
 // role 1 어드민 role 2 특정 부서 어드민
 // role 0 -> 일반 유저
-app.get("/api/user/auth", auth, (req, res) => {
+app.get("/api/users/auth", auth, (req, res) => {
   // 미들웨어 통과후이기 때문에 Authentication이 True라는 말
   res.status(200).json({
     _id: req.user._id,
@@ -84,6 +84,33 @@ app.get("/api/user/auth", auth, (req, res) => {
     isAuth: true,
     email: req.user.email,
   });
+});
+
+app.get("/api/users/logout", auth, async (req, res) => {
+  // mongodb user를 찾고 내용을 바꾸는 메소드
+  try {
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      // 바꿀 내용 token을 없앤다.
+      { token: "" }
+    );
+    return res.status(200).send({
+      success: true,
+    });
+  } catch (err) {
+    return res.json({ success: false, err });
+  }
+  // User.findOneAndUpdate(
+  //   { _id: req.user._id },
+  //   // 바꿀 내용 token을 없앤다.
+  //   { token: "" }
+  // ),
+  //   (err, user) => {
+  //     if (err) return res.json({ success: false, err });
+  //     return res.status(200).send({
+  //       success: true,
+  //     });
+  //   };
 });
 
 app.listen(port, () => console.log(`app lisening on port ${port}`));
