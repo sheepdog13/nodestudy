@@ -57,14 +57,14 @@ userSchema.pre("save", function (next) {
   }
 });
 
-// 비밀번호 비교 정적 메서드
+// 비밀번호 비교 메서드
 userSchema.methods.comparePassword = function (plainPassword) {
   // plainpassword와 db에 암호화된 비밀번호가 같은지 확인
   const result = bcrypt.compare(plainPassword, this.password);
   return result;
 };
 
-// 토큰 발급 정적 메서드
+// 토큰 발급 메서드
 userSchema.methods.generateToken = async function (cb) {
   var user = this;
   // jsonwebtoken을 이용해서 token을 생성하기
@@ -77,6 +77,19 @@ userSchema.methods.generateToken = async function (cb) {
   try {
     const savedUser = await user.save();
     return user;
+  } catch (err) {
+    return err;
+  }
+};
+
+userSchema.statics.findByToken = async function (token) {
+  var user = this;
+  try {
+    // 코인을 decode 한다.
+    const decodedtoken = jwt.verify(token, "secretToken");
+    // 복호화된 토큰에서 user_id와 같은 유저 찾기
+    const userdata = await user.findOne({ _id: decodedtoken, token: token });
+    return userdata;
   } catch (err) {
     return err;
   }

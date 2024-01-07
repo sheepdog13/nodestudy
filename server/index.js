@@ -14,14 +14,15 @@ app.use(bodyParser.json());
 app.use(cookieparser());
 
 const mongoose = require("mongoose");
+const { auth } = require("./middleware/auth");
 mongoose
   .connect(config.mongoURI)
-  .then(() => console.log("mongodb connected"))
+  .then(() => console.log("mongodb connected!"))
   .catch((err) => console.log(err));
 
 app.get("/", (req, res) => res.send("hi"));
 
-app.post("/register", async (req, res) => {
+app.post("/api/users/register", async (req, res) => {
   //회원가입시 필요 정보를 client에서 가져오면
   //데이터베이스에 삽입한다
   //body parser를 통해 body에 담긴 정보를 가져온다
@@ -71,6 +72,18 @@ app.post("/api/users/login", async (req, res) => {
   } catch (err) {
     return res.status(400).send(err);
   }
+});
+
+// role 1 어드민 role 2 특정 부서 어드민
+// role 0 -> 일반 유저
+app.get("/api/user/auth", auth, (req, res) => {
+  // 미들웨어 통과후이기 때문에 Authentication이 True라는 말
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
+    email: req.user.email,
+  });
 });
 
 app.listen(port, () => console.log(`app lisening on port ${port}`));
