@@ -82,23 +82,17 @@ userSchema.methods.generateToken = async function (cb) {
   }
 };
 
-userSchema.statics.findByToken = function (token) {
+userSchema.statics.findByToken = async function (token) {
   var user = this;
-  // 코인을 decode 한다.
-  jwt.verify(token, "secretToken", async function (err, decoded) {
+  try {
+    // 코인을 decode 한다.
+    const decodedtoken = jwt.verify(token, "secretToken");
     // 복호화된 토큰에서 user_id와 같은 유저 찾기
-    try {
-      const user = await user.findOne({ _id: decoded, token: token });
-      return user;
-    } catch (err) {
-      return err;
-    }
-    // user.findOne({ _id: decoded, token: token }, function (err, user) {
-    //   if (err) return cb(err);
-    //   console.log("userschema", user);
-    //   cb(null, user);
-    // });
-  });
+    const userdata = await user.findOne({ _id: decodedtoken, token: token });
+    return userdata;
+  } catch (err) {
+    return err;
+  }
 };
 
 const User = mongoose.model("User", userSchema);

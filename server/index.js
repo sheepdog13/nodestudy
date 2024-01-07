@@ -17,7 +17,7 @@ const mongoose = require("mongoose");
 const { auth } = require("./middleware/auth");
 mongoose
   .connect(config.mongoURI)
-  .then(() => console.log("mongodb connected"))
+  .then(() => console.log("mongodb connected!"))
   .catch((err) => console.log(err));
 
 app.get("/", (req, res) => res.send("hi"));
