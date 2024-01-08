@@ -10,8 +10,8 @@ feat : express mongodb 연결
 ################
 # 꼬릿말(footer)을 아랫줄에 작성 (현재 커밋과 관련된 이슈 번호 추가 등)
 # 예) Close #7
-express로 5000번에 서버를 만들고 send로 hi를 출력함
-mongodb연결후 shema 작성
+- express로 5000번에 서버를 만들고 send로 hi를 출력함
+- mongodb연결후 shema 작성
 ################
 # feat : 새로운 기능 추가
 # fix : 버그 수정
