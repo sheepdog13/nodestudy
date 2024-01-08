@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://admin.dump-in.co.kr/",
+      target: "http://localhost:4000",
       changeOrigin: true,
     })
   );
