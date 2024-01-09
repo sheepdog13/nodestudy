@@ -21,6 +21,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.get("/", (req, res) => res.send("hi"));
+app.get("/api/hello", (req, res) => res.send("hello"));
 
 app.post("/api/users/register", async (req, res) => {
   //회원가입시 필요 정보를 client에서 가져오면
