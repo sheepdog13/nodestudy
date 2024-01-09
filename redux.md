@@ -1,14 +1,15 @@
-# Redux 소개
+# Redux 설정
 
-## 01. 리덕스란?
+## 01. 리덕스를 도와주는 미들웨어
 
-state를 관리해주는 상태관리 라이브러리
+### redux-promise
 
-### 전역 상태 관리
+store는 state를 바꿀때 dispatch를 이용해 action으로 state를 바꾼다.
+객체형식인 action이 promise형식으로 왔을때 store에서 promise형식을 받을 수 있게 도와주는 미들웨어
 
-컴포넌트끼리 똑같은 상태를 공유해야할 때도 여러 컴포넌트를 거치지 않고 손쉽게 상태값을 전달하거나 업데이트할 수 있다.
+### redux-thunk
 
-![](https://i.imgur.com/cfYwlpL.png)
+객체형식인 action이 function형식으로 왔을때 store에서 function형식을 받을 수 있게 도와주는 미들웨어
 
 ### redux data flow
 
