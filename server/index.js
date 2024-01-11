@@ -117,8 +117,8 @@ app.post("/api/sendmail", (req, res) => {
   });
 
   const mailOptions = {
-    from: config.NODEMAILER_email, // 네이버 아이디
-    to: req.body.email, // 수신자 아이디
+    from: config.NODEMAILER_email, // 네이버 이메일
+    to: req.body.email, // 수신자 이메일
     subject: req.body.subject,
     text: req.body.text,
   };

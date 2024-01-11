@@ -9,9 +9,10 @@ import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 import promiseMiddleware from "redux-promise";
 import { thunk } from "redux-thunk";
-import rootReducer from "./_reducers";
+import Reducer from "./_reducers";
+import store from "./store";
 
-const createStoreMiddleware = applyMiddleware(
+const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,
   thunk
 )(createStore);
@@ -20,12 +21,7 @@ const queryCient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider
-    store={createStoreMiddleware(
-      rootReducer,
-      window.__REDUX_DEVTOOLS_EXENSION__ && window.__REDUX_DEVTOOLS_EXENSION__()
-    )}
-  >
+  <Provider store={store}>
     <QueryClientProvider client={queryCient}>
       <BrowserRouter>
         <App />
