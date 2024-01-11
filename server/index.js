@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieparser = require("cookie-parser");
 const config = require("./config/key");
 const { User } = require("./models/User");
+const nodemailer = require("nodemailer");
 
 // application/x-www-form-urlencoded 이렇게된 데이터를 분석해서 가져올 수 있게 해준다.
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -100,6 +101,33 @@ app.get("/api/users/logout", auth, async (req, res) => {
     });
   } catch (err) {
     return res.json({ success: false, err });
+  }
+});
+
+// nodemailer를 활용한 메일 보내기
+app.post("/api/sendmail", (req, res) => {
+  const transporter = nodemailer.createTransport({
+    service: "naver",
+    host: "smtp.naver.com", // SMTP 서버명
+    port: 465, // SMTP 포트
+    auth: {
+      user: config.NODEMAILER_USER, // 네이버 아이디
+      pass: config.NODEMAILER_PASS, // 네이버 비밀번호
+    },
+  });
+
+  const mailOptions = {
+    from: config.NODEMAILER_email, // 네이버 이메일
+    to: req.body.email, // 수신자 이메일
+    subject: req.body.subject,
+    text: req.body.text,
+  };
+
+  try {
+    transporter.sendMail(mailOptions);
+    return res.status(200).json({ emailsuccess: true, text: req.body.text });
+  } catch (err) {
+    return res.json({ emailsuccess: false, err });
   }
 });
 
