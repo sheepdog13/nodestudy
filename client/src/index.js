@@ -6,16 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import promiseMiddleware from "redux-promise";
-import { thunk } from "redux-thunk";
-import Reducer from "./_reducers";
 import store from "./store";
-
-const createStoreWithMiddleware = applyMiddleware(
-  promiseMiddleware,
-  thunk
-)(createStore);
 
 const queryCient = new QueryClient();
 
