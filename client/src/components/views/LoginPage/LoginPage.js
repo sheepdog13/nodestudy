@@ -7,15 +7,13 @@ import { useEffect } from "react";
 function LoginPage() {
   // redux user 가져오기
   const user = useSelector((state) => state.user.value);
-
+  // useNavigate
+  const navigate = useNavigate();
   useEffect(() => {
     if (user.loginSuccess) {
       navigate("/");
     }
   }, [user]);
-
-  // useNavigate
-  const navigate = useNavigate();
   //  useform hook
   const { register, handleSubmit } = useForm();
   // redux dispatch함수 가져오기
