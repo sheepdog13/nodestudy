@@ -1,11 +1,25 @@
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { asynsLoginFetch, login } from "../../../_reducers/user";
+import { useEffect } from "react";
 
 function LoginPage() {
-  const dispatch = useDispatch();
+  // redux user 가져오기
+  const user = useSelector((state) => state.user.value);
+
+  useEffect(() => {
+    if (user.loginSuccess) {
+      navigate("/");
+    }
+  }, [user]);
+
+  // useNavigate
+  const navigate = useNavigate();
   //  useform hook
   const { register, handleSubmit } = useForm();
+  // redux dispatch함수 가져오기
+  const dispatch = useDispatch();
 
   // onsubmit 함수
   const onSubmit = (data) => {
