@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { asynsRegisterFetch } from "../../../_reducers/user";
-
+import Auth from "../../../hoc/auth";
 function RegisterPage() {
   // redux user 가져오기
   const user = useSelector((state) => state.user.value);
@@ -60,4 +60,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default Auth(RegisterPage, false);

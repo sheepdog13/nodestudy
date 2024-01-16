@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { asynsLoginFetch, login } from "../../../_reducers/user";
 import { useEffect } from "react";
+import Auth from "../../../hoc/auth";
 
 function LoginPage() {
   // redux user 가져오기
   const user = useSelector((state) => state.user.value);
   // useNavigate
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (user.loginSuccess) {
       navigate("/");
@@ -43,4 +44,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Auth(LoginPage, false);

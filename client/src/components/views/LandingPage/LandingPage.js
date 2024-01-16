@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { combineSlices } from "@reduxjs/toolkit";
+import Auth from "../../../hoc/auth";
 
 function LandingPage() {
-  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("/api/hello")
@@ -30,4 +28,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default Auth(LandingPage, null);

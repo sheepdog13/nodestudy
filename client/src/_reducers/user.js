@@ -19,9 +19,14 @@ const asynsRegisterFetch = createAsyncThunk(
   }
 );
 
+const asynsAuth = createAsyncThunk("userSlice/asynsAuth", async () => {
+  const response = await axios.get("/api/users/auth");
+  return response.data;
+});
+
 export const userSlice = createSlice({
   name: "user",
-  initialState: { value: {} },
+  initialState: { value: {}, auth: {} },
   reducers: {
     // login: async (state, action) => {
     //   const req = await axios.post("/api/users/login", action.payload);
@@ -43,9 +48,12 @@ export const userSlice = createSlice({
       state.value = action.payload;
       state.status = "complete";
     });
+    builder.addCase(asynsAuth.fulfilled, (state, action) => {
+      state.auth = action.payload;
+    });
   },
 });
 
 export const { login } = userSlice.actions;
-export { asynsLoginFetch, asynsRegisterFetch };
+export { asynsLoginFetch, asynsRegisterFetch, asynsAuth };
 export default userSlice.reducer;
