@@ -9,6 +9,7 @@ function LoginPage() {
   const user = useSelector((state) => state.user.value);
   // useNavigate
   const navigate = useNavigate();
+  
   useEffect(() => {
     if (user.loginSuccess) {
       navigate("/");
