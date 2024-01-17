@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "build:server": "babel ./ -d build",
+    "start": "node build/index.js",
     "backend": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run backend\" \"cd ../client && npm run start\""
@@ -22,6 +23,7 @@
     "nodemailer": "^6.9.8"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
     "nodemon": "^3.0.2"
   }
 }
