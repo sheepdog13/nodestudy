@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:server": "babel ./ -d build",
+    "build": "babel ./ -d build",
     "start": "node build/index.js",
+    "postinstall": "npm run build && echo 'Build complete!'",
     "backend": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run backend\" \"cd ../client && npm run start\""
