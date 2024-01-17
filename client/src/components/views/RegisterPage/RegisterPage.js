@@ -1,35 +1,48 @@
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-
+import { asynsRegisterFetch } from "../../../_reducers/user";
+import Auth from "../../../hoc/auth";
 function RegisterPage() {
+  // redux user 가져오기
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.success) {
+      navigate("/login");
+    }
+  }, [user]);
   //  useform hook
   const { register, handleSubmit } = useForm();
 
-  // post 요청 함수
-  async function login(data) {
-    try {
-      //응답 성공
-      const response = await axios.post("/api/auth/login", data);
-      console.log(response);
-    } catch (error) {
-      //응답 실패
-      console.error(error);
-    }
-  }
-
   // onsubmit 함수
   const onSubmit = (data) => {
-    const user = { ...data };
-    console.log(user);
-    login(user);
+    if (data.password !== data.password_confirm) {
+      alert("비밀번호가 서로 맞지 않습니다");
+    } else {
+      const body = {
+        email: data.email,
+        name: data.name,
+        password: data.password,
+      };
+      dispatch(asynsRegisterFetch(body));
+    }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          placeholder="id"
-          {...register("username", { required: true })}
+          placeholder="email"
+          {...register("email", { required: true })}
+        ></input>
+        <input
+          placeholder="name"
+          {...register("name", { required: true })}
         ></input>
         <input
           placeholder="password"
@@ -38,13 +51,13 @@ function RegisterPage() {
         ></input>
         <input
           placeholder="password_confirm"
-          type="password_confirm"
+          type="password"
           {...register("password_confirm", { required: true })}
         ></input>
-        <button type="submit">로그인</button>
+        <button type="submit">회원가입</button>
       </form>
     </>
   );
 }
 
-export default RegisterPage;
+export default Auth(RegisterPage, false);

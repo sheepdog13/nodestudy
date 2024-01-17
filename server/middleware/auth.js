@@ -14,7 +14,7 @@ let auth = async (req, res, next) => {
     req.user = userdata;
     next();
   } catch (err) {
-    throw err;
+    return res.json({ isAuth: false, error: err });
   }
 };
 

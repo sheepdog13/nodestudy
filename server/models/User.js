@@ -91,7 +91,7 @@ userSchema.statics.findByToken = async function (token) {
     const userdata = await user.findOne({ _id: decodedtoken, token: token });
     return userdata;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+import Auth from "../../../hoc/auth";
 
 function LandingPage() {
   useEffect(() => {
@@ -10,7 +11,21 @@ function LandingPage() {
       })
       .catch((err) => console.log(err));
   }, []);
-  return <div>LandingPage</div>;
+  const logout = async () => {
+    try {
+      const res = await axios.get("/api/users/logout");
+      console.log(res);
+    } catch (err) {
+      alert("로그아웃 실패");
+      console.log(err);
+    }
+  };
+  return (
+    <div>
+      <button onClick={logout}>로그아웃</button>
+      LandingPage
+    </div>
+  );
 }
 
-export default LandingPage;
+export default Auth(LandingPage, null);

@@ -10,9 +10,23 @@ const asynsLoginFetch = createAsyncThunk(
   }
 );
 
+const asynsRegisterFetch = createAsyncThunk(
+  "userSlice/asynsRegisterFetch",
+  async (formdata) => {
+    console.log("formdata", formdata);
+    const resp = await axios.post("/api/users/register", formdata);
+    return resp.data;
+  }
+);
+
+const asynsAuth = createAsyncThunk("userSlice/asynsAuth", async () => {
+  const response = await axios.get("/api/users/auth");
+  return response.data;
+});
+
 export const userSlice = createSlice({
   name: "user",
-  initialState: { value: {} },
+  initialState: { value: {}, auth: {} },
   reducers: {
     // login: async (state, action) => {
     //   const req = await axios.post("/api/users/login", action.payload);
@@ -30,9 +44,16 @@ export const userSlice = createSlice({
     builder.addCase(asynsLoginFetch.rejected, (state, action) => {
       state.status = "fail";
     });
+    builder.addCase(asynsRegisterFetch.fulfilled, (state, action) => {
+      state.value = action.payload;
+      state.status = "complete";
+    });
+    builder.addCase(asynsAuth.fulfilled, (state, action) => {
+      state.auth = action.payload;
+    });
   },
 });
 
 export const { login } = userSlice.actions;
-export { asynsLoginFetch };
+export { asynsLoginFetch, asynsRegisterFetch, asynsAuth };
 export default userSlice.reducer;
