@@ -14,13 +14,18 @@ const asynsRegisterFetch = createAsyncThunk(
   "userSlice/asynsRegisterFetch",
   async (formdata) => {
     console.log("formdata", formdata);
-    const resp = await axios.post("/api/users/register", formdata);
+    const resp = await axios.post(
+      "https://nodestudy-34u2.onrender.com/api/users/register",
+      formdata
+    );
     return resp.data;
   }
 );
 
 const asynsAuth = createAsyncThunk("userSlice/asynsAuth", async () => {
-  const response = await axios.get("/api/users/auth");
+  const response = await axios.get(
+    "https://nodestudy-34u2.onrender.com/api/users/auth"
+  );
   return response.data;
 });
 
