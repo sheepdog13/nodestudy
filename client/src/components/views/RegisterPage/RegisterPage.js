@@ -15,7 +15,7 @@ function RegisterPage() {
     if (user.success) {
       navigate("/login");
     }
-  }, [user]);
+  }, [navigate, user]);
   //  useform hook
   const { register, handleSubmit } = useForm();
 

@@ -26,7 +26,7 @@ const Auth = (SpecificComponent, option, adminRoute = null) => {
           }
         }
       });
-    }, [userAuth]);
+    }, [dispatch, navigate, userAuth]);
 
     return <SpecificComponent />;
   }
