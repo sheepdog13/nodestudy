@@ -2,12 +2,12 @@ name: Frontend Deploy # action 명
 
 on: # 이벤트 트리거
   push: # push event에 반응
-   paths:
+    paths:
       - "client/**" # client의 변경이 있을 때
-   branches: # github repository의 branch가 
+    branches: # github repository의 branch가
       - master # master 일 경우만
 
-jobs: 
+jobs:
   deploy: # GitHub-hosted runners env
     runs-on: macos-latest # using MacOS
 
@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set Node.js 18.x
         uses: actions/setup-node@v3
         with:
@@ -38,10 +38,12 @@ jobs:
           aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
           aws configure set default.region $AWS_REGION
-      
+
       - name: remove # 삭제
         run: |
-          aws cloudfront create-invalidation --profile=sheepdog13 --distribution-id AWS_CloudFront_ID --paths /*
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.AWS_CloudFront_ID }} \
+            --paths "/*"
 
       - name: deploy # 배포
         run: |
