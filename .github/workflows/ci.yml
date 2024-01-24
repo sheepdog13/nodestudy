@@ -1,0 +1,20 @@
+name: Check the source code
+on:
+  pull_request:
+    paths:
+      - "frontend/**" # frontend의 변경이 있을 때
+    branches:
+      - master # master에 pr할때
+jobs:
+  test:
+    name: Check the source code
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "client"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: npm ci
+      - name: Lint
+        run: npm run lint
