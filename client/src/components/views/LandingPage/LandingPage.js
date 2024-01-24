@@ -5,7 +5,7 @@ import Auth from "../../../hoc/auth";
 function LandingPage() {
   useEffect(() => {
     axios
-      .get("/api/hello")
+      .get("https://nodestudy-34u2.onrender.com/api/hello")
       .then((response) => {
         console.log(response);
       })
@@ -23,7 +23,7 @@ function LandingPage() {
   return (
     <div>
       <button onClick={logout}>로그아웃</button>
-      LandingPage
+      LandingPage git action로 s3 자동 배포 테스트
     </div>
   );
 }

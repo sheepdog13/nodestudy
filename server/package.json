@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "build": "npm i && babel ./ --ignore node_modules -d build",
+    "start": "node build/index.js",
     "backend": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run backend\" \"cd ../client && npm run start\""
@@ -16,12 +17,15 @@
     "body-parser": "^1.20.2",
     "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
     "nodemailer": "^6.9.8"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/preset-env": "^7.23.8",
     "nodemon": "^3.0.2"
   }
 }

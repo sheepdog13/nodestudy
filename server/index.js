@@ -1,9 +1,9 @@
+require("dotenv").config();
+const { MongoURI } = process.env;
 const express = require("express");
 const app = express();
-const port = 4000;
 const bodyParser = require("body-parser");
 const cookieparser = require("cookie-parser");
-const config = require("./config/key");
 const { User } = require("./models/User");
 const nodemailer = require("nodemailer");
 
@@ -17,7 +17,7 @@ app.use(cookieparser());
 const mongoose = require("mongoose");
 const { auth } = require("./middleware/auth");
 mongoose
-  .connect(config.mongoURI)
+  .connect(MongoURI)
   .then(() => console.log("mongodb connected!"))
   .catch((err) => console.log(err));
 
@@ -131,4 +131,9 @@ app.post("/api/sendmail", (req, res) => {
   }
 });
 
-app.listen(port, () => console.log(`app lisening on port ${port}`));
+const PORT = process.env.PORT || 4000;
+
+const handleListening = () =>
+  console.log(`✅ Server listenting on http://localhost:${PORT} 🚀`);
+
+app.listen(PORT, handleListening);
