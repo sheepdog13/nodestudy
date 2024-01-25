@@ -23,7 +23,7 @@ function LandingPage() {
   return (
     <div>
       <button onClick={logout}>로그아웃</button>
-      gitactions로 배포
+      gitactions로 배포 테스트
     </div>
   );
 }
