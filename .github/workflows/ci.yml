@@ -4,7 +4,7 @@ on:
     paths:
       - "frontend/**" # frontend의 변경이 있을 때
     branches:
-      - master # master에 pr할때
+      - develop # master에 pr할때
 jobs:
   test:
     name: Check the source code
