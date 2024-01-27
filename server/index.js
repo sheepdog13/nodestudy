@@ -1,5 +1,5 @@
 require("dotenv").config();
-import cors from "cors";
+const cors = require("cors");
 const { MongoURI } = process.env;
 const express = require("express");
 const app = express();
