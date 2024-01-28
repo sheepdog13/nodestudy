@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SvgIcon from "@mui/material/SvgIcon";
 import NightlightIcon from "@mui/icons-material/Nightlight";
+import { useNavigate } from "react-router-dom";
 
 const Wapper = styled.div`
   width: 100%;
@@ -171,10 +172,11 @@ const Span = styled.span`
   mix-blend-mode: difference;
 `;
 
-function NavBar() {
+function Header() {
+  const navigate = useNavigate();
   return (
     <Wapper>
-      <Burger for="burger">
+      <Burger>
         <BurInput type="checkbox" id="burger" />
         <BurSpan></BurSpan>
         <BurSpan></BurSpan>
@@ -183,7 +185,11 @@ function NavBar() {
       <Logo src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="home" />
       <RightBox>
         <SvgIcon component={NightlightIcon} fontSize={"large"} />
-        <LoginBtn>
+        <LoginBtn
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
           <Span>Login</Span>
         </LoginBtn>
       </RightBox>
@@ -191,4 +197,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default Header;
