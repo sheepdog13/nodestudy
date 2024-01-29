@@ -4,8 +4,10 @@ import axios from "axios";
 const asynsLoginFetch = createAsyncThunk(
   "userSlice/asynLoginFetch",
   async (formdata) => {
-    console.log("formdata", formdata);
-    const resp = await axios.post("/api/users/login", formdata);
+    const resp = await axios.post(
+      "https://nodestudy-34u2.onrender.com/api/users/login",
+      formdata
+    );
     return resp.data;
   }
 );

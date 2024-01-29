@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import Auth from "../../../hoc/auth";
-import NavBar from "../NavBar/NavBar";
+import Header from "../Header/Header";
 import styled from "styled-components";
 
 const Wapper = styled.div`
@@ -11,14 +10,6 @@ const Wapper = styled.div`
 `;
 
 function LandingPage() {
-  useEffect(() => {
-    axios
-      .get("https://nodestudy-34u2.onrender.com/api/hello")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
-  }, []);
   // const logout = async () => {
   //   try {
   //     const res = await axios.get("/api/users/logout");
@@ -30,7 +21,7 @@ function LandingPage() {
   // };
   return (
     <Wapper>
-      <NavBar />
+      <Header />
     </Wapper>
   );
 }
