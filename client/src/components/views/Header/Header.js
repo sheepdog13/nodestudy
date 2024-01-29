@@ -177,7 +177,7 @@ function Header() {
   return (
     <Wapper>
       <Burger>
-        <BurInput type="checkbox" id="burger" />
+        <BurInput type="checkbox" />
         <BurSpan></BurSpan>
         <BurSpan></BurSpan>
         <BurSpan></BurSpan>

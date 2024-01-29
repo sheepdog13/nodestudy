@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import Auth from "../../../hoc/auth";
 import Header from "../Header/Header";
 import styled from "styled-components";
