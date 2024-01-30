@@ -77,8 +77,13 @@ app.post("/api/users/login", async (req, res) => {
     // 토큰 쿠키에 저장
     const userdata = await user.generateToken();
     // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지
+
+    const options = {
+      sameSite: "none",
+      secure: true,
+    };
     res
-      .cookie("x_auth", userdata.token)
+      .cookie("x_auth", userdata.token, options)
       .status(200)
       .json({ loginSuccess: true, userId: userdata._id });
   } catch (err) {
