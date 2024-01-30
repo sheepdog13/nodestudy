@@ -6,7 +6,10 @@ const asynsLoginFetch = createAsyncThunk(
   async (formdata) => {
     const resp = await axios.post(
       "https://nodestudy-34u2.onrender.com/api/users/login",
-      formdata
+      formdata,
+      {
+        withCredentials: true,
+      }
     );
     return resp.data;
   }
