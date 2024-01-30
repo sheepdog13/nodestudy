@@ -79,8 +79,11 @@ app.post("/api/users/login", async (req, res) => {
     // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지
 
     const options = {
+      httpOnly: true,
       sameSite: "none",
       secure: true,
+      domain: "localhost",
+      maxAge: config.jwt.expiresInSec * 1000,
     };
     res
       .cookie("x_auth", userdata.token, options)
