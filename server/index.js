@@ -8,8 +8,10 @@ const cookieparser = require("cookie-parser");
 const { User } = require("./models/User");
 const nodemailer = require("nodemailer");
 
+app.set("trust proxy", true);
+
 const corsOptions = {
-  origin: ["http://localhost:3000/", "http://sheepdog13.blog"],
+  origin: ["http://localhost:3000", "http://sheepdog13.blog"],
   credentials: true, // 쿠키 전송을 허용
 };
 
