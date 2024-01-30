@@ -83,7 +83,6 @@ app.post("/api/users/login", async (req, res) => {
       sameSite: "none",
       secure: true,
       domain: "localhost",
-      maxAge: config.jwt.expiresInSec * 1000,
     };
     res
       .cookie("x_auth", userdata.token, options)
