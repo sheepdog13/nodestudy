@@ -10,8 +10,8 @@ const nodemailer = require("nodemailer");
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://sheepdog13.blog"],
-    credentials: "true",
+    origin: "http://localhost:3000",
+    credential: "true",
   })
 );
 // application/x-www-form-urlencoded 이렇게된 데이터를 분석해서 가져올 수 있게 해준다.
