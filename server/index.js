@@ -10,7 +10,7 @@ const nodemailer = require("nodemailer");
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     credential: "true",
   })
 );
