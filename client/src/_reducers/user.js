@@ -8,7 +8,7 @@ const asynsLoginFetch = createAsyncThunk(
       "https://nodestudy-34u2.onrender.com/api/users/login",
       formdata,
       {
-        withCredentials: true,
+        withCredentials: true, // 쿠키 전송을 허용하는 옵션
       }
     );
     return resp.data;

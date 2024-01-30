@@ -8,20 +8,12 @@ const cookieparser = require("cookie-parser");
 const { User } = require("./models/User");
 const nodemailer = require("nodemailer");
 
-const whitelist = ["http://localhost:3000", "http://sheepdog13.blog"];
-
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      // 만일 whitelist 배열에 origin인자가 있을 경우
-      callback(null, true); // cors 허용
-    } else {
-      callback(new Error("Not Allowed Origin!")); // cors 비허용
-    }
-  },
+  origin: ["http://localhost:3000/", "http://sheepdog13.blog"],
+  credentials: true, // 쿠키 전송을 허용
 };
 
-app.use(cors({ corsOptions, credential: "true" })); // 옵션을 추가한 CORS 미들웨어 추가
+app.use(cors(corsOptions));
 
 // application/x-www-form-urlencoded 이렇게된 데이터를 분석해서 가져올 수 있게 해준다.
 app.use(bodyParser.urlencoded({ extended: true }));
