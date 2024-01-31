@@ -84,9 +84,8 @@ app.post("/api/users/login", async (req, res) => {
 
     const options = {
       httpOnly: true,
-      sameSite: "none",
+      sameSite: "None",
       secure: true,
-      domain: "localhost",
     };
     res
       .cookie("x_auth", userdata.token, options)
