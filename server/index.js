@@ -14,7 +14,7 @@ const corsOptions = {
   origin: [
     "http://localhost:3000",
     "http://sheepdog13.blog",
-    "d3j4m3dvbn515a.cloudfront.net",
+    "https://d3j4m3dvbn515a.cloudfront.net",
   ],
   credentials: true, // 쿠키 전송을 허용
 };
