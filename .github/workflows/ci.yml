@@ -1,6 +1,6 @@
 name: Check the source code
 on:
-  pull_request:
+  push:
     paths:
       - "frontend/**" # frontend의 변경이 있을 때
     branches:
