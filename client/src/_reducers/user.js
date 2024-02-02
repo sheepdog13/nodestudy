@@ -1,15 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const httpClientForCredentials = axios.create({
+  baseURL: "https://nodestudy-34u2.onrender.com",
+  // 서버와 클라이언트가 다른 도메인일 경우 필수
+  withCredentials: true,
+});
 const asynsLoginFetch = createAsyncThunk(
   "userSlice/asynLoginFetch",
   async (formdata) => {
-    const resp = await axios.post(
-      "https://nodestudy-34u2.onrender.com/api/users/login",
-      formdata,
-      {
-        withCredentials: true, // 쿠키 전송을 허용하는 옵션
-      }
+    const resp = await httpClientForCredentials.post(
+      "/api/users/login",
+      formdata
     );
     return resp.data;
   }
@@ -28,9 +30,7 @@ const asynsRegisterFetch = createAsyncThunk(
 );
 
 const asynsAuth = createAsyncThunk("userSlice/asynsAuth", async () => {
-  const response = await axios.get(
-    "https://nodestudy-34u2.onrender.com/api/users/auth"
-  );
+  const response = await httpClientForCredentials.get("/api/users/auth");
   return response.data;
 });
 
@@ -50,6 +50,9 @@ export const userSlice = createSlice({
     builder.addCase(asynsLoginFetch.fulfilled, (state, action) => {
       state.value = action.payload;
       state.status = "complete";
+      httpClientForCredentials.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${action.payload.accestoken}`;
     });
     builder.addCase(asynsLoginFetch.rejected, (state, action) => {
       state.status = "fail";
