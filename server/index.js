@@ -87,7 +87,7 @@ app.post("/api/users/login", async (req, res) => {
       sameSite: "None",
       secure: true,
     };
-    res.cookie("x_auth", userdata.token, options).status(200).json({
+    res.cookie("refreshtoken", userdata.token, options).status(200).json({
       accestoken: userdata.token,
       loginSuccess: true,
       userId: userdata._id,
