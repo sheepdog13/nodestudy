@@ -47,7 +47,6 @@ function RegisterPage() {
 
   return (
     <Wapper>
-      <h1>cloudfront 캐시 무력화 확인</h1>
       <common.Form onSubmit={handleSubmit(onSubmit)}>
         <common.Title>Sign Up</common.Title>
         <common.InputBox>
