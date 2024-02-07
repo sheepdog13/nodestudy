@@ -78,19 +78,21 @@ app.post("/api/users/login", async (req, res) => {
       });
     }
 
-    // 토큰 쿠키에 저장
-    const userdata = await user.generateToken();
-    // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지
-
+    // user 정보와 access 토큰을 받아온다.
+    const [userdata, accesstoken] = await user.generateToken();
+    // refresh 토큰의 옵션
     const options = {
       httpOnly: true,
       sameSite: "None",
       secure: true,
+      // 2주
+      maxAge: 14 * 24 * 60 * 60 * 1000,
     };
+    // access 토큰은  body로 넘겨주고 refresh 토큰은 cookie에 저장한다.
     res.cookie("refreshtoken", userdata.token, options).status(200).json({
-      accestoken: userdata.token,
+      accesstoken,
       loginSuccess: true,
-      userId: userdata._id,
+      name: userdata.name,
     });
   } catch (err) {
     return res.status(400).send(err);
@@ -102,10 +104,8 @@ app.post("/api/users/login", async (req, res) => {
 app.get("/api/users/auth", auth, (req, res) => {
   // 미들웨어 통과후이기 때문에 Authentication이 True라는 말
   res.status(200).json({
-    _id: req.user._id,
-    isAdmin: req.user.role === 0 ? false : true,
+    name: req.name,
     isAuth: true,
-    email: req.user.email,
   });
 });
 
