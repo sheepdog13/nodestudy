@@ -52,7 +52,7 @@ export const userSlice = createSlice({
       state.status = "complete";
       httpClientForCredentials.defaults.headers.common[
         "Authorization"
-      ] = `Bearer ${action.payload.accestoken}`;
+      ] = `Bearer ${action.payload.accesstoken}`;
     });
     builder.addCase(asynsLoginFetch.rejected, (state, action) => {
       state.status = "fail";
