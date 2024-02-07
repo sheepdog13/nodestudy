@@ -65,18 +65,19 @@ userSchema.methods.comparePassword = function (plainPassword) {
 };
 
 // 토큰 발급 메서드
-userSchema.methods.generateToken = async function (cb) {
+userSchema.methods.generateToken = async function () {
   var user = this;
   // jsonwebtoken을 이용해서 token을 생성하기
-  var token = jwt.sign(user._id.toHexString(), "secretToken");
-  // user._id(db의 _id) + secreToken = token
-  // token으로 user를 판별할 수 있다.
-  // user.token = token;
-  user.token = token;
+  var accesstoken = jwt.sign({ username: user.name }, "secretToken", {
+    expiresIn: "5m",
+  });
+  var refreshtoken = jwt.sign(user._id.toHexString(), "secretToken");
+  // refreshtoken을 db에 저장한다.
+  user.token = refreshtoken;
 
   try {
     const savedUser = await user.save();
-    return user;
+    return [user, accesstoken];
   } catch (err) {
     return err;
   }
@@ -88,7 +89,7 @@ userSchema.statics.findByToken = async function (token) {
     // 코인을 decode 한다.
     const decodedtoken = jwt.verify(token, "secretToken");
     // 복호화된 토큰에서 user_id와 같은 유저 찾기
-    const userdata = await user.findOne({ _id: decodedtoken, token: token });
+    const userdata = await user.findOne({ _id: decodedtoken });
     return userdata;
   } catch (err) {
     throw err;
