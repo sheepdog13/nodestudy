@@ -13,6 +13,8 @@ let auth = async (req, res, next) => {
     } catch (err) {
       return res.json({ isAuth: false, error: err });
     }
+  } else {
+    return res.json({ isAuth: false });
   }
   // try {
   //   // 토큰을 복호화 한후 유저를 찾는다.

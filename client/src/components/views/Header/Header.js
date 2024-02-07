@@ -3,8 +3,11 @@ import styled from "styled-components";
 import SvgIcon from "@mui/material/SvgIcon";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Wapper = styled.div`
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 64px;
   display: flex;
@@ -173,6 +176,7 @@ const Span = styled.span`
 `;
 
 function Header() {
+  const isLogin = useSelector((state) => state.user.auth.isAuth);
   const navigate = useNavigate();
   return (
     <Wapper>
@@ -185,13 +189,23 @@ function Header() {
       <Logo src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="home" />
       <RightBox>
         <SvgIcon component={NightlightIcon} fontSize={"large"} />
-        <LoginBtn
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          <Span>Login</Span>
-        </LoginBtn>
+        {isLogin ? (
+          <LoginBtn
+            onClick={() => {
+              //로그아웃
+            }}
+          >
+            <Span>logout</Span>
+          </LoginBtn>
+        ) : (
+          <LoginBtn
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            <Span>Login</Span>
+          </LoginBtn>
+        )}
       </RightBox>
     </Wapper>
   );

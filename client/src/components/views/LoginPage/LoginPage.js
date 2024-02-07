@@ -7,9 +7,9 @@ import Auth from "../../../hoc/auth";
 import styled from "styled-components";
 import * as common from "../../../styles/LoginRegister";
 
-const Wapper = styled.div`
-  margin-top: 100px;
+const Wrapper = styled.div`
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +38,7 @@ function LoginPage() {
   };
 
   return (
-    <Wapper>
+    <Wrapper>
       <common.Form onSubmit={handleSubmit(onSubmit)}>
         <common.Title>Login</common.Title>
         <common.InputBox>
@@ -84,7 +84,7 @@ function LoginPage() {
           </common.Btn>
         </common.BtnBox>
       </common.Form>
-    </Wapper>
+    </Wrapper>
   );
 }
 
