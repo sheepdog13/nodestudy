@@ -111,8 +111,15 @@ app.get("/api/users/auth", auth, (req, res) => {
 
 app.get("/api/users/logout", async (req, res) => {
   try {
+    const options = {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      // 2주
+      maxAge: 14 * 24 * 60 * 60 * 1000,
+    };
     // cookie에 저장된 refreshtoken 삭제
-    res.clearCookie("refreshtoken");
+    res.clearCookie("refreshtoken", options);
     return res.status(200).send({
       success: true,
     });
