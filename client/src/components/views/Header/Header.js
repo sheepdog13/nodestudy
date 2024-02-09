@@ -186,7 +186,13 @@ function Header() {
         <BurSpan></BurSpan>
         <BurSpan></BurSpan>
       </Burger>
-      <Logo src={`${process.env.PUBLIC_URL}/img/logo.png`} alt="home" />
+      <Logo
+        onClick={() => {
+          navigate("/");
+        }}
+        src={`${process.env.PUBLIC_URL}/img/logo.png`}
+        alt="home"
+      />
       <RightBox>
         <SvgIcon component={NightlightIcon} fontSize={"large"} />
         {isLogin ? (

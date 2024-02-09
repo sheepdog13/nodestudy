@@ -6,6 +6,7 @@ const httpClientForCredentials = axios.create({
   // 서버와 클라이언트가 다른 도메인일 경우 필수
   withCredentials: true,
 });
+
 const asynsLoginFetch = createAsyncThunk(
   "userSlice/asynLoginFetch",
   async (formdata) => {
@@ -20,7 +21,6 @@ const asynsLoginFetch = createAsyncThunk(
 const asynsRegisterFetch = createAsyncThunk(
   "userSlice/asynsRegisterFetch",
   async (formdata) => {
-    console.log("formdata", formdata);
     const resp = await axios.post(
       "https://nodestudy-34u2.onrender.com/api/users/register",
       formdata
@@ -37,12 +37,7 @@ const asynsAuth = createAsyncThunk("userSlice/asynsAuth", async () => {
 export const userSlice = createSlice({
   name: "user",
   initialState: { value: {}, auth: {} },
-  reducers: {
-    // login: async (state, action) => {
-    //   const req = await axios.post("/api/users/login", action.payload);
-    //   state.value = {};
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(asynsLoginFetch.pending, (state, action) => {
       state.status = "Loading";
@@ -63,6 +58,12 @@ export const userSlice = createSlice({
     });
     builder.addCase(asynsAuth.fulfilled, (state, action) => {
       state.auth = action.payload;
+      // refresh토큰으로 재발급 받은 accesstoken 헤더에 default로 넣기
+      if (action.payload.accesstoken) {
+        httpClientForCredentials.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${action.payload.accesstoken}`;
+      }
     });
   },
 });

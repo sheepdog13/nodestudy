@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
-const Wapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -33,10 +33,10 @@ function LandingPage() {
   const isLogin = useSelector((state) => state.user.auth.isAuth);
 
   return (
-    <Wapper>
+    <Wrapper>
       <Header />
       {isLogin && <H1>반갑습니다 {username}님!</H1>}
-    </Wapper>
+    </Wrapper>
   );
 }
 
