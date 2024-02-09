@@ -109,14 +109,10 @@ app.get("/api/users/auth", auth, (req, res) => {
   });
 });
 
-app.get("/api/users/logout", auth, async (req, res) => {
-  // mongodb user를 찾고 내용을 바꾸는 메소드
+app.get("/api/users/logout", async (req, res) => {
   try {
-    await User.findOneAndUpdate(
-      { _id: req.user._id },
-      // 바꿀 내용 token을 없앤다.
-      { token: "" }
-    );
+    // cookie에 저장된 refreshtoken 삭제
+    res.clearCookie("refreshtoken");
     return res.status(200).send({
       success: true,
     });
