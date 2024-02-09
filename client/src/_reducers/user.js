@@ -3,6 +3,7 @@ import axios from "axios";
 
 const httpClientForCredentials = axios.create({
   baseURL: "https://nodestudy-34u2.onrender.com",
+
   // 서버와 클라이언트가 다른 도메인일 경우 필수
   withCredentials: true,
 });
@@ -31,6 +32,11 @@ const asynsRegisterFetch = createAsyncThunk(
 
 const asynsAuth = createAsyncThunk("userSlice/asynsAuth", async () => {
   const response = await httpClientForCredentials.get("/api/users/auth");
+  return response.data;
+});
+
+const asynsLogout = createAsyncThunk("userSlice/asynsLogout", async () => {
+  const response = await httpClientForCredentials.get("/api/users/logout");
   return response.data;
 });
 
@@ -65,9 +71,14 @@ export const userSlice = createSlice({
         ] = `Bearer ${action.payload.accesstoken}`;
       }
     });
+    builder.addCase(asynsLogout.fulfilled, (state, action) => {
+      state.auth = action.payload;
+      // accesstoken default삭제
+      httpClientForCredentials.defaults.headers.common["Authorization"] = "";
+    });
   },
 });
 
 export const { login } = userSlice.actions;
-export { asynsLoginFetch, asynsRegisterFetch, asynsAuth };
+export { asynsLoginFetch, asynsRegisterFetch, asynsAuth, asynsLogout };
 export default userSlice.reducer;

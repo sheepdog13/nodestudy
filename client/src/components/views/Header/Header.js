@@ -3,7 +3,8 @@ import styled from "styled-components";
 import SvgIcon from "@mui/material/SvgIcon";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { asynsLogout } from "../../../_reducers/user";
 
 const Wapper = styled.div`
   position: fixed;
@@ -178,6 +179,7 @@ const Span = styled.span`
 function Header() {
   const isLogin = useSelector((state) => state.user.auth.isAuth);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <Wapper>
       <Burger>
@@ -199,6 +201,7 @@ function Header() {
           <LoginBtn
             onClick={() => {
               //로그아웃
+              dispatch(asynsLogout());
             }}
           >
             <Span>logout</Span>
