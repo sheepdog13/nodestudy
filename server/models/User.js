@@ -1,3 +1,5 @@
+require("dotenv").config();
+const { SecretKey } = process.env;
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -68,10 +70,10 @@ userSchema.methods.comparePassword = function (plainPassword) {
 userSchema.methods.generateToken = async function () {
   var user = this;
   // jsonwebtoken을 이용해서 token을 생성하기
-  var accesstoken = jwt.sign({ username: user.name }, "secretToken", {
+  var accesstoken = jwt.sign({ username: user.name }, SecretKey, {
     expiresIn: "5m",
   });
-  var refreshtoken = jwt.sign(user._id.toHexString(), "secretToken");
+  var refreshtoken = jwt.sign(user._id.toHexString(), SecretKey);
   // refreshtoken을 db에 저장한다.
   user.token = refreshtoken;
 
@@ -87,7 +89,7 @@ userSchema.statics.findByToken = async function (token) {
   var user = this;
   try {
     // 코인을 decode 한다.
-    const decodedtoken = jwt.verify(token, "secretToken");
+    const decodedtoken = jwt.verify(token, SecretKey);
     // 복호화된 토큰에서 user_id와 같은 유저 찾기
     const userdata = await user.findOne({ _id: decodedtoken });
     return userdata;

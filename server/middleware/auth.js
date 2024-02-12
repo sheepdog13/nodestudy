@@ -1,3 +1,5 @@
+require("dotenv").config();
+const { SecretKey } = process.env;
 const { User } = require("../models/User");
 const jwt = require("jsonwebtoken");
 
@@ -10,7 +12,7 @@ let auth = async (req, res, next) => {
   // accesstoken이 있을때 조작된 jwt인지 확인후 미들웨어 종료
   if (accesstoken) {
     try {
-      const userdata = jwt.verify(accesstoken.split(" ")[1], "secretToken");
+      const userdata = jwt.verify(accesstoken.split(" ")[1], SecretKey);
       req.name = userdata.username;
       next();
     } catch (err) {}
