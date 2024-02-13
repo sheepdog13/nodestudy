@@ -73,6 +73,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(asynsLogout.fulfilled, (state, action) => {
       state.auth = action.payload;
+      state.value = { loginSuccess: false };
       // accesstoken default삭제
       httpClientForCredentials.defaults.headers.common["Authorization"] = "";
     });
