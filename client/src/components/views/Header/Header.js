@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import SvgIcon from "@mui/material/SvgIcon";
 import NightlightIcon from "@mui/icons-material/Nightlight";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { asynsLogout } from "../../../_reducers/user";
+import { toggleDarkMode } from "../../../_reducers/darkmode";
 
 const Wapper = styled.div`
   position: fixed;
@@ -84,6 +86,7 @@ const Logo = styled.img`
   margin-top: 8px;
   width: 120px;
   height: 40px;
+  color: #fff;
 `;
 
 const RightBox = styled.div`
@@ -178,6 +181,7 @@ const Span = styled.span`
 
 function Header() {
   const isLogin = useSelector((state) => state.user.auth.isAuth);
+  const isDark = useSelector((state) => state.darkmode.isDark);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
@@ -192,11 +196,29 @@ function Header() {
         onClick={() => {
           navigate("/");
         }}
-        src={`${process.env.PUBLIC_URL}/img/logo.png`}
+        src={`${process.env.PUBLIC_URL}/img/${
+          isDark ? "lightlogo" : "logo"
+        }.png`}
         alt="home"
       />
       <RightBox>
-        <SvgIcon component={NightlightIcon} fontSize={"large"} />
+        {isDark ? (
+          <SvgIcon
+            onClick={() => {
+              dispatch(toggleDarkMode());
+            }}
+            component={NightlightIcon}
+            fontSize={"large"}
+          />
+        ) : (
+          <SvgIcon
+            onClick={() => {
+              dispatch(toggleDarkMode());
+            }}
+            component={LightModeIcon}
+            fontSize={"large"}
+          />
+        )}
         {isLogin ? (
           <LoginBtn
             onClick={() => {
