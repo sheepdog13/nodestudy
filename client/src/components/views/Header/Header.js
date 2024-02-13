@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import SvgIcon from "@mui/material/SvgIcon";
 import NightlightIcon from "@mui/icons-material/Nightlight";
