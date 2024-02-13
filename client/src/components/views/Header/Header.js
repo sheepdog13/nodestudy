@@ -9,8 +9,6 @@ import { asynsLogout } from "../../../_reducers/user";
 import { toggleDarkMode } from "../../../_reducers/darkmode";
 
 const Wapper = styled.div`
-  position: fixed;
-  top: 0;
   width: 100%;
   height: 64px;
   display: flex;
@@ -18,6 +16,8 @@ const Wapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
 `;
 
 const Burger = styled.label`
@@ -69,7 +69,7 @@ const BurSpan = styled.span`
   position: absolute;
   height: 4px;
   width: 100%;
-  background: black;
+  background: ${(props) => props.theme.textColor};
   border-radius: 9px;
   opacity: 1;
   left: 0;
@@ -94,11 +94,6 @@ const RightBox = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 20px;
-  svg {
-    @media (max-width: 820px) {
-      display: none;
-    }
-  }
 `;
 
 const LoginBtn = styled.button`
