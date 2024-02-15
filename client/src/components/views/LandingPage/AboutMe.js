@@ -40,8 +40,8 @@ const ProfileImg = styled.img`
 
 const ProfileName = styled.div`
   display: flex;
-  font-size: 30px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 900;
 `;
 
 const DescBox = styled.div`
@@ -53,9 +53,9 @@ const DescBox = styled.div`
 `;
 
 const ProfileDesc = styled.div`
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 15px;
   color: #d9d9d9;
+  opacity: 0.7;
 `;
 
 const IconBox = styled.div`

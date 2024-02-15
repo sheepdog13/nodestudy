@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
+import { fonts } from "./fonts";
 const GlobalStyles = createGlobalStyle`
     html, body, div, span, applet, object, iframe,
     h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -14,11 +14,12 @@ const GlobalStyles = createGlobalStyle`
     figure, figcaption, footer, header, hgroup, 
     menu, nav, output, ruby, section, summary,
     time, mark, audio, video {
+    ${fonts}
+    font-family: "SCDream";
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     box-sizing: border-box;
     }
