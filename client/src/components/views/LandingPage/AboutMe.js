@@ -65,6 +65,9 @@ const IconBox = styled.div`
   margin-bottom: 10px;
   svg {
     font-size: 30px;
+    &:hover {
+      color: #b6dcec;
+    }
   }
 `;
 
@@ -83,9 +86,27 @@ function AboutMe() {
           <ProfileDesc>Busan, Korea</ProfileDesc>
         </DescBox>
         <IconBox>
-          <SvgIcon component={GitHubIcon} fontSize={"inherit"} />
-          <SvgIcon component={InstagramIcon} fontSize={"inherit"} />
-          <SvgIcon component={AlternateEmailIcon} fontSize={"inherit"} />
+          <SvgIcon
+            onClick={() => {
+              window.open("https://github.com/sheepdog13");
+            }}
+            component={GitHubIcon}
+            fontSize={"inherit"}
+          />
+          <SvgIcon
+            onClick={() => {
+              window.open("https://www.instagram.com/jo_chang_uk/");
+            }}
+            component={InstagramIcon}
+            fontSize={"inherit"}
+          />
+          <SvgIcon
+            onClick={() => {
+              window.open(`mailto:sheepdog13@naver.com`);
+            }}
+            component={AlternateEmailIcon}
+            fontSize={"inherit"}
+          />
         </IconBox>
       </ContentBox>
     </Wrapper>
