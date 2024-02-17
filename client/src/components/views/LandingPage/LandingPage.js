@@ -21,7 +21,8 @@ const H1 = styled.h1`
   font-weight: 500;
 `;
 const ContentBox = styled.div`
-  @media (min-width: 820px) {
+  @media (max-width: 820px) {
+    flex-direction: column;
   }
   width: 100%;
   margin-top: 15px;
@@ -33,6 +34,9 @@ const ContentBox = styled.div`
 const LeftContentBox = styled.div`
   display: flex;
   width: 300px;
+  @media (max-width: 820px) {
+    width: 100%;
+  }
 `;
 const RightContentBox = styled.div`
   display: flex;

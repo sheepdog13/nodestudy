@@ -17,6 +17,9 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
+  @media (max-width: 820px) {
+    font-size: 15px;
+  }
   display: flex;
   font-size: 18px;
   font-weight: 700;
@@ -24,6 +27,16 @@ const Title = styled.div`
 
 const ContentBox = styled.div`
   display: flex;
+  flex-direction: row;
+`;
+
+const ProfileBox = styled.div`
+  @media (max-width: 820px) {
+    width: 30%;
+    gap: 12px;
+  }
+  display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -31,6 +44,10 @@ const ContentBox = styled.div`
 `;
 
 const ProfileImg = styled.img`
+  @media (max-width: 820px) {
+    width: 120px;
+    height: 120px;
+  }
   width: 180px;
   height: 180px;
   margin-top: 15px;
@@ -39,6 +56,9 @@ const ProfileImg = styled.img`
 `;
 
 const ProfileName = styled.div`
+  @media (max-width: 820px) {
+    font-size: 18px;
+  }
   display: flex;
   font-size: 20px;
   font-weight: 900;
@@ -53,17 +73,26 @@ const DescBox = styled.div`
 `;
 
 const ProfileDesc = styled.div`
+  @media (max-width: 820px) {
+    font-size: 13px;
+  }
   font-size: 15px;
   color: #d9d9d9;
   opacity: 0.7;
 `;
 
 const IconBox = styled.div`
+  @media (max-width: 820px) {
+    gap: 15px;
+  }
   display: flex;
   flex-direction: row;
   gap: 20px;
   margin-bottom: 10px;
   svg {
+    @media (max-width: 820px) {
+      font-size: 25px;
+    }
     font-size: 30px;
     &:hover {
       color: #b6dcec;
@@ -71,43 +100,77 @@ const IconBox = styled.div`
   }
 `;
 
+const IntroBox = styled.div`
+  @media (min-width: 820px) {
+    display: none;
+  }
+  display: flex;
+  width: 70%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const IntroTite = styled.div`
+  font-size: 30px;
+  text-align: center;
+  line-height: 1.3;
+  font-weight: 700;
+`;
+
+const IntroDesc = styled.div`
+  text-align: center;
+  line-height: 1.5;
+  font-size: 20px;
+  font-weight: 500;
+  color: #8c8c8c;
+`;
+
 function AboutMe() {
   return (
     <Wrapper>
       <Title>About Me</Title>
       <ContentBox>
-        <ProfileImg
-          src={`${process.env.PUBLIC_URL}/img/bond.webp`}
-          alt="bond"
-        />
-        <ProfileName>sheepdog</ProfileName>
-        <DescBox>
-          <ProfileDesc>FrontEnd Developer</ProfileDesc>
-          <ProfileDesc>Busan, Korea</ProfileDesc>
-        </DescBox>
-        <IconBox>
-          <SvgIcon
-            onClick={() => {
-              window.open("https://github.com/sheepdog13");
-            }}
-            component={GitHubIcon}
-            fontSize={"inherit"}
+        <ProfileBox>
+          <ProfileImg
+            src={`${process.env.PUBLIC_URL}/img/bond.webp`}
+            alt="bond"
           />
-          <SvgIcon
-            onClick={() => {
-              window.open("https://www.instagram.com/jo_chang_uk/");
-            }}
-            component={InstagramIcon}
-            fontSize={"inherit"}
-          />
-          <SvgIcon
-            onClick={() => {
-              window.open(`mailto:sheepdog13@naver.com`);
-            }}
-            component={AlternateEmailIcon}
-            fontSize={"inherit"}
-          />
-        </IconBox>
+          <ProfileName>sheepdog</ProfileName>
+          <DescBox>
+            <ProfileDesc>FrontEnd Developer</ProfileDesc>
+            <ProfileDesc>Busan, Korea</ProfileDesc>
+          </DescBox>
+          <IconBox>
+            <SvgIcon
+              onClick={() => {
+                window.open("https://github.com/sheepdog13");
+              }}
+              component={GitHubIcon}
+              fontSize={"inherit"}
+            />
+            <SvgIcon
+              onClick={() => {
+                window.open("https://www.instagram.com/jo_chang_uk/");
+              }}
+              component={InstagramIcon}
+              fontSize={"inherit"}
+            />
+            <SvgIcon
+              onClick={() => {
+                window.open(`mailto:sheepdog13@naver.com`);
+              }}
+              component={AlternateEmailIcon}
+              fontSize={"inherit"}
+            />
+          </IconBox>
+        </ProfileBox>
+        <IntroBox>
+          <IntroTite>Blog</IntroTite>
+          <IntroDesc>
+            안녕하세요 자바스크립트를 <br /> 주로 다루는 기술 블로그입니다.
+          </IntroDesc>
+        </IntroBox>
       </ContentBox>
     </Wrapper>
   );
