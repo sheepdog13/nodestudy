@@ -3,8 +3,9 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
-import markdown from "./test.md";
 import styled from "styled-components";
+import fm from "front-matter";
+import axios from "axios";
 
 const StyledCodeBlock = styled(SyntaxHighlighter)`
   border-radius: 8px;
@@ -15,11 +16,16 @@ function MarkdownRenderer() {
 
   // markdown 파일을 가져와서 text로 변환
   useEffect(() => {
-    fetch(markdown)
-      .then((response) => response.text())
-      .then((text) => {
-        setMarkdownContent(text);
-      });
+    const getMarkdown = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/markdown");
+        const parsedMarkdown = fm(response.data);
+        setMarkdownContent(parsedMarkdown.body);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+    getMarkdown();
   }, []);
 
   return (

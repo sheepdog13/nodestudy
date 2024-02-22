@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const cookieparser = require("cookie-parser");
 const nodemailer = require("nodemailer");
 const userRouter = require("./routes/users");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 
@@ -30,7 +32,7 @@ app.use(bodyParser.json());
 app.use(cookieparser());
 
 const mongoose = require("mongoose");
-const { auth } = require("./middleware/auth");
+
 mongoose
   .connect(MongoURI)
   .then(() => console.log("mongodb connected!"))
@@ -40,6 +42,20 @@ app.get("/", (req, res) => res.send("hi"));
 app.get("/api/hello", (req, res) => res.send("hello"));
 
 app.use("/api/users", userRouter);
+
+const markdownFilePath = path.join(__dirname, "_post/markdown.md");
+
+app.get("/markdown", (req, res) => {
+  // Markdown 파일을 읽어 응답으로 전송
+  fs.readFile(markdownFilePath, "utf8", (err, data) => {
+    if (err) {
+      console.error("Error reading the file", err);
+      return res.status(500).send("Internal Server Error");
+    }
+    res.setHeader("Content-Type", "text/markdown");
+    res.send(data);
+  });
+});
 
 // nodemailer를 활용한 메일 보내기
 app.post("/api/sendmail", (req, res) => {

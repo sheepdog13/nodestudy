@@ -1,3 +1,9 @@
+---
+date: "2024-02-20"
+title: "리액트 딥다이브 클래스형 컴포넌트와 함수형 컴포넌트"
+imgpath: "/img/thumnail.jpeg"
+---
+
 # test입니다
 
 ### test 입니다
