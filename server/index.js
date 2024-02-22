@@ -57,6 +57,37 @@ app.get("/markdown", (req, res) => {
   });
 });
 
+const markdownDirectory = path.join(__dirname, "_post");
+
+app.get("/allmarkdown", (req, res) => {
+  fs.readdir(markdownDirectory, (err, files) => {
+    if (err) {
+      console.error("Error reading directory", err);
+      return res.status(500).send("Internal Server Error");
+    }
+
+    const markdownFiles = files.filter((file) => path.extname(file) === ".md");
+
+    const markdownData = [];
+
+    markdownFiles.forEach((file) => {
+      const filePath = path.join(markdownDirectory, file);
+      fs.readFile(filePath, "utf8", (err, data) => {
+        if (err) {
+          console.error("Error reading file", err);
+          return res.status(500).send("Internal Server Error");
+        }
+        markdownData.push({ filename: file, content: data });
+
+        // Check if all files are read
+        if (markdownData.length === markdownFiles.length) {
+          res.json(markdownData);
+        }
+      });
+    });
+  });
+});
+
 // nodemailer를 활용한 메일 보내기
 app.post("/api/sendmail", (req, res) => {
   const transporter = nodemailer.createTransport({
