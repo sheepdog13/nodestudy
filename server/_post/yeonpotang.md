@@ -1,10 +1,10 @@
 ---
 date: "2024-02-21"
 title: "2월21일 점심은 짜장밥"
-imgpath: "/img/thumnail.jpeg"
+imgpath: "/img/yeonpotang/cover.jpeg"
 ---
 
-# test입니다
+# 2월26일 점심은 연포탕
 
 ### test 입니다
 
@@ -19,4 +19,4 @@ console.log("test2");
 
 **별 기호(asterisks)**
 
-![대체텍스트](../img/bond.webp)
+![대체텍스트](../img/yeonpotang/cover.jpeg)

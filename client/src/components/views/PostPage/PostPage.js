@@ -6,27 +6,31 @@ import remarkGfm from "remark-gfm";
 import styled from "styled-components";
 import fm from "front-matter";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const StyledCodeBlock = styled(SyntaxHighlighter)`
   border-radius: 8px;
 `;
 
-function MarkdownRenderer() {
-  const [markdownContent, setMarkdownContent] = useState("");
+function PostPage() {
+  const { failename } = useParams();
 
+  const [markdownContent, setMarkdownContent] = useState("");
   // markdown 파일을 가져와서 text로 변환
   useEffect(() => {
-    const getMarkdown = async () => {
+    const getMarkdown = async (failename) => {
       try {
-        const response = await axios.get("http://localhost:4000/markdown");
+        const response = await axios.get(
+          `http://localhost:4000/post/${failename}`
+        );
         const parsedMarkdown = fm(response.data);
         setMarkdownContent(parsedMarkdown.body);
       } catch (err) {
         console.log("err", err);
       }
     };
-    getMarkdown();
-  }, []);
+    getMarkdown(failename);
+  }, [failename]);
 
   return (
     <div>
@@ -60,4 +64,4 @@ function MarkdownRenderer() {
   );
 }
 
-export default MarkdownRenderer;
+export default PostPage;

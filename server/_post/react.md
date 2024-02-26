@@ -1,10 +1,10 @@
 ---
 date: "2024-02-20"
 title: "리액트 딥다이브 클래스형 컴포넌트와 함수형 컴포넌트"
-imgpath: "/img/thumnail.jpeg"
+imgpath: "/img/react/cover.jpeg"
 ---
 
-# test입니다
+# 리액트 딥다이브 클래스형 컴포넌트와 함수형 컴포넌트
 
 ### test 입니다
 
@@ -19,4 +19,4 @@ console.log("test2");
 
 **별 기호(asterisks)**
 
-![대체텍스트](../img/bond.webp)
+![대체텍스트](../img/react/cover.jpeg)

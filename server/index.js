@@ -43,9 +43,10 @@ app.get("/api/hello", (req, res) => res.send("hello"));
 
 app.use("/api/users", userRouter);
 
-const markdownFilePath = path.join(__dirname, "_post/markdown.md");
+app.get(`/post/:filePath`, (req, res) => {
+  const filePath = req.params.filePath;
 
-app.get("/markdown", (req, res) => {
+  const markdownFilePath = path.join(__dirname, `_post/${filePath}.md`);
   // Markdown 파일을 읽어 응답으로 전송
   fs.readFile(markdownFilePath, "utf8", (err, data) => {
     if (err) {

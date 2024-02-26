@@ -6,7 +6,7 @@ import RegisterPage from "./components/views/RegisterPage/RegisterPage";
 import { ThemeProvider } from "styled-components";
 import { dark, light } from "./styles/theme";
 import { useSelector } from "react-redux";
-import MarkdownRenderer from "./_post/MarkdownRenderer";
+import PostPage from "./components/views/PostPage/PostPage";
 
 function App() {
   const isDark = useSelector((state) => state.darkmode.isDark);
@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<LaindingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/post/first" element={<MarkdownRenderer />} />
+          <Route path="/post/:failename" element={<PostPage />} />
         </Routes>
       </ThemeProvider>
     </>
