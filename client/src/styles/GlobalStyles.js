@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
     del, dfn, em, img, ins, kbd, q, s, samp,
     small, strike, strong, sub, sup, tt, var,
     b, u, i, center,
-    dl, dt, dd, ol, ul, li,
+    dl, dt, dd,
     fieldset, form, label, legend,
     table, caption, tbody, tfoot, thead, tr, th, td,
     article, aside, canvas, details, embed, 
@@ -30,9 +30,6 @@ const GlobalStyles = createGlobalStyle`
     }
     body {
         line-height: 1;
-    }
-    ol, ul {
-    list-style: none;
     }
     blockquote, q {
     quotes: none;

@@ -1,30 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Auth from "../../../hoc/auth";
 import Header from "../Header/Header";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import AboutMe from "./AboutMe";
+import PostCard from "./PostCard";
+import axios from "axios";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 120px;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
 `;
 
-const H1 = styled.h1`
-  display: flex;
-  font-size: 30px;
-  font-weight: 500;
-`;
 const ContentBox = styled.div`
   @media (max-width: 820px) {
     flex-direction: column;
   }
   width: 100%;
+  height: 100%;
   margin-top: 15px;
   padding: 0 2rem;
   gap: 15px;
@@ -34,42 +32,45 @@ const ContentBox = styled.div`
 const LeftContentBox = styled.div`
   display: flex;
   width: 300px;
+  height: 100%;
   @media (max-width: 820px) {
     width: 100%;
   }
 `;
 const RightContentBox = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  background-color: ${(props) => props.theme.boxBgColor};
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 `;
 
 function LandingPage() {
-  // const logout = async () => {
-  //   try {
-  //     const res = await axios.get("/api/users/logout");
-  //     console.log(res);
-  //   } catch (err) {
-  //     alert("로그아웃 실패");
-  //     console.log(err);
-  //   }
-  // };
-  const username = useSelector((state) => state.user.auth.name);
-  const isLogin = useSelector((state) => state.user.auth.isAuth);
-
+  const [postArray, setPostArray] = useState([]);
+  useEffect(() => {
+    const getMarkdown = async () => {
+      try {
+        const response = await axios.get(
+          "https://nodestudy-34u2.onrender.com/allmarkdown"
+        );
+        setPostArray(response.data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+    getMarkdown();
+  }, []);
   return (
     <>
-      <Header />
       <Wrapper>
+        <Header />
         <ContentBox>
           <LeftContentBox>
             <AboutMe />
           </LeftContentBox>
           <RightContentBox>
-            {isLogin && <H1>반갑습니다 {username}님!</H1>}
+            {postArray.map((post, i) => (
+              <PostCard key={i} post={post} />
+            ))}
           </RightContentBox>
         </ContentBox>
       </Wrapper>
