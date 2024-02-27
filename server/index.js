@@ -51,7 +51,7 @@ app.get(`/post/:filePath`, (req, res) => {
   fs.readFile(markdownFilePath, "utf8", (err, data) => {
     if (err) {
       console.error("Error reading the file", err);
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).json({ success: "1", err });
     }
     res.setHeader("Content-Type", "text/markdown");
     res.send(data);
@@ -64,7 +64,7 @@ app.get("/allmarkdown", (req, res) => {
   fs.readdir(markdownDirectory, (err, files) => {
     if (err) {
       console.error("Error reading directory", err);
-      return res.status(500).send("Internal Server Error");
+      return res.status(500).json({ success: "2", err });
     }
 
     const markdownFiles = files.filter((file) => path.extname(file) === ".md");
@@ -76,7 +76,7 @@ app.get("/allmarkdown", (req, res) => {
       fs.readFile(filePath, "utf8", (err, data) => {
         if (err) {
           console.error("Error reading file", err);
-          return res.status(500).send("Internal Server Error");
+          return res.status(500).json({ success: "3", err });
         }
         markdownData.push({ filename: file, content: data });
 
