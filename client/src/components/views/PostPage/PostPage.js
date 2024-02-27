@@ -1,30 +1,71 @@
 import React, { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import remarkGfm from "remark-gfm";
 import styled from "styled-components";
 import fm from "front-matter";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Header from "../Header/Header";
+import MarkdownRender from "../../common/MarkdownRender";
 
-const StyledCodeBlock = styled(SyntaxHighlighter)`
-  border-radius: 8px;
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 0 10rem;
+  display: flex;
+  flex-direction: column;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
+`;
+
+const Preview = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+const Date = styled.p`
+  color: #d9d9d9;
+  font-weight: 500;
+`;
+
+const Title = styled.h1`
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 700;
+`;
+
+const Thumbnail = styled.img`
+  width: 100%;
+  height: 400px;
+  border-radius: 20px;
+  object-fit: cover;
+`;
+
+const ContentBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  gap: 15px;
 `;
 
 function PostPage() {
   const { failename } = useParams();
 
   const [markdownContent, setMarkdownContent] = useState("");
+  const [markdownData, setMarkdownData] = useState();
   // markdown 파일을 가져와서 text로 변환
   useEffect(() => {
     const getMarkdown = async (failename) => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/post/${failename}`
+          `https://nodestudy-34u2.onrender.com/post/${failename}`
         );
         const parsedMarkdown = fm(response.data);
         setMarkdownContent(parsedMarkdown.body);
+        setMarkdownData(parsedMarkdown.attributes);
       } catch (err) {
         console.log("err", err);
       }
@@ -33,34 +74,19 @@ function PostPage() {
   }, [failename]);
 
   return (
-    <div>
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{
-          code({ node, inline, className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || "");
-            return !inline && match ? (
-              // !inline && match 조건에 맞으면 하이라이팅
-              <StyledCodeBlock
-                {...props}
-                style={vscDarkPlus}
-                language={match[1]}
-                PreTag="div"
-              >
-                {String(children).replace(/\n$/, "")}
-              </StyledCodeBlock>
-            ) : (
-              // 안 맞다면 문자열 형태로 반환
-              <code {...props} className={className}>
-                {children}
-              </code>
-            );
-          },
-        }}
-      >
-        {markdownContent}
-      </ReactMarkdown>
-    </div>
+    <>
+      <Header />
+      <Wrapper>
+        <Preview>
+          <Date>{markdownData?.date}</Date>
+          <Title>{markdownData?.title}</Title>
+          <Thumbnail src={markdownData?.imgpath} />
+        </Preview>
+        <ContentBox>
+          <MarkdownRender markdownContent={markdownContent} />
+        </ContentBox>
+      </Wrapper>
+    </>
   );
 }
 

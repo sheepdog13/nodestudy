@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Thumbnail = styled.img`
+  width: 100%;
   border-radius: 10px;
   height: 316px;
   object-fit: cover;

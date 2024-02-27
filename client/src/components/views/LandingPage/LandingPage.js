@@ -40,7 +40,7 @@ const LeftContentBox = styled.div`
 const RightContentBox = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 `;
 
@@ -49,7 +49,9 @@ function LandingPage() {
   useEffect(() => {
     const getMarkdown = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/allmarkdown");
+        const response = await axios.get(
+          "https://nodestudy-34u2.onrender.com/allmarkdown"
+        );
         setPostArray(response.data);
       } catch (err) {
         console.log("err", err);
@@ -59,8 +61,8 @@ function LandingPage() {
   }, []);
   return (
     <>
-      <Header />
       <Wrapper>
+        <Header />
         <ContentBox>
           <LeftContentBox>
             <AboutMe />

@@ -1,7 +1,7 @@
 ---
 date: "2024-02-21"
 title: "2월21일 저녁은 스마일 마라탕"
-imgpath: "/img/ramen/cover.png"
+imgpath: "/img/ramen/cover.jpg"
 ---
 
 # 2월26일은 저녁은 오이시 라멘
@@ -19,4 +19,4 @@ console.log("test2");
 
 **별 기호(asterisks)**
 
-![대체텍스트](../img/ramen/cover.png)
+![대체텍스트](../img/ramen/cover.jpg)
