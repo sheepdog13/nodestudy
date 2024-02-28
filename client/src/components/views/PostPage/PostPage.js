@@ -5,6 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import MarkdownRender from "../../common/MarkdownRender";
+import Comment from "../../common/Comment";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -61,11 +62,12 @@ function PostPage() {
     const getMarkdown = async (failename) => {
       try {
         const response = await axios.get(
-          `https://nodestudy-34u2.onrender.com/post/${failename}`
+          `http://localhost:4000/post/${failename}`
         );
         const parsedMarkdown = fm(response.data);
         setMarkdownContent(parsedMarkdown.body);
         setMarkdownData(parsedMarkdown.attributes);
+        document.title = parsedMarkdown.attributes.title;
       } catch (err) {
         console.log("err", err);
       }
@@ -85,6 +87,7 @@ function PostPage() {
         <ContentBox>
           <MarkdownRender markdownContent={markdownContent} />
         </ContentBox>
+        <Comment />
       </Wrapper>
     </>
   );
