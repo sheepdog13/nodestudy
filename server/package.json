@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm i && babel ./ --ignore node_modules -d build",
+    "build": "npm i && babel ./ --ignore node_modules -d build && cp -r _post build/",
     "start": "node build/index.js",
     "backend": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
