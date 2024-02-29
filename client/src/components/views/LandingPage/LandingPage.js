@@ -58,7 +58,9 @@ function LandingPage() {
   useEffect(() => {
     const getMarkdown = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/allmarkdown");
+        const response = await axios.get(
+          "https://nodestudy-34u2.onrender.com/allmarkdown"
+        );
         setPostArray(response.data);
       } catch (err) {
         console.log("err", err);

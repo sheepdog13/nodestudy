@@ -81,7 +81,7 @@ function PostPage() {
     const getMarkdown = async (failename) => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/post/${failename}`
+          `https://nodestudy-34u2.onrender.com/post/${failename}`
         );
         const parsedMarkdown = fm(response.data);
         setMarkdownContent(parsedMarkdown.body);
