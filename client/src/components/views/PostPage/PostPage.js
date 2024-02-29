@@ -5,11 +5,16 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import MarkdownRender from "../../common/MarkdownRender";
+import Comment from "../../common/Comment";
+import MetaTag from "../../common/MetaTag";
 
 const Wrapper = styled.div`
+  @media (max-width: 400px) {
+    padding: 50px 1rem;
+  }
   width: 100%;
   height: 100%;
-  padding: 0 10rem;
+  padding: 50px 10rem;
   display: flex;
   flex-direction: column;
   background-color: ${(props) => props.theme.bgColor};
@@ -17,11 +22,16 @@ const Wrapper = styled.div`
 `;
 
 const Preview = styled.div`
+  @media (max-width: 400px) {
+    gap: 10px;
+    margin-top: 30px;
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
+  margin-top: 50px;
 `;
 
 const Date = styled.p`
@@ -30,12 +40,22 @@ const Date = styled.p`
 `;
 
 const Title = styled.h1`
+  @media (max-width: 400px) {
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+  text-align: center;
   font-size: 40px;
   line-height: 1.2;
   font-weight: 700;
 `;
 
 const Thumbnail = styled.img`
+  @media (max-width: 400px) {
+    margin-top: 20px;
+    height: 200px;
+  }
   width: 100%;
   height: 400px;
   border-radius: 20px;
@@ -75,6 +95,12 @@ function PostPage() {
 
   return (
     <>
+      <MetaTag
+        type="posting"
+        title={markdownData?.title}
+        desc={markdownData?.title}
+        img={markdownData?.imgpath}
+      />
       <Header />
       <Wrapper>
         <Preview>
@@ -85,6 +111,7 @@ function PostPage() {
         <ContentBox>
           <MarkdownRender markdownContent={markdownContent} />
         </ContentBox>
+        {markdownData && <Comment />}
       </Wrapper>
     </>
   );

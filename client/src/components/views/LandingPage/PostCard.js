@@ -4,15 +4,23 @@ import fm from "front-matter";
 import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
+  @media (max-width: 400px) {
+    padding: 10px;
+    gap: 15px;
+  }
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 20px;
   padding: 15px;
   border-radius: 10px;
   background-color: ${(props) => props.theme.boxBgColor};
 `;
 
 const Thumbnail = styled.img`
+  @media (max-width: 400px) {
+    height: 200px;
+  }
   width: 100%;
   border-radius: 10px;
   height: 316px;
@@ -20,12 +28,17 @@ const Thumbnail = styled.img`
 `;
 
 const Date = styled.div`
-  margin-top: 20px;
+  @media (max-width: 400px) {
+    font-size: 15px;
+  }
   font-size: 18px;
 `;
 
 const Title = styled.p`
-  margin-top: 20px;
+  @media (max-width: 400px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
   overflow-wrap: break-word;
   font-size: 30px;
   font-weight: 500;
