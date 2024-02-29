@@ -10,9 +10,10 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  margin-top: 64px;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 120px;
+  padding-bottom: 60px;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
 `;
@@ -20,6 +21,9 @@ const Wrapper = styled.div`
 const ContentBox = styled.div`
   @media (max-width: 820px) {
     flex-direction: column;
+  }
+  @media (max-width: 400px) {
+    padding: 0 1rem;
   }
   width: 100%;
   height: 100%;
@@ -38,6 +42,10 @@ const LeftContentBox = styled.div`
   }
 `;
 const RightContentBox = styled.div`
+  @media (max-width: 820px) {
+    display: flex;
+    flex-direction: column;
+  }
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -49,9 +57,7 @@ function LandingPage() {
   useEffect(() => {
     const getMarkdown = async () => {
       try {
-        const response = await axios.get(
-          "https://nodestudy-34u2.onrender.com/allmarkdown"
-        );
+        const response = await axios.get("http://localhost:4000/allmarkdown");
         setPostArray(response.data);
       } catch (err) {
         console.log("err", err);
@@ -61,8 +67,8 @@ function LandingPage() {
   }, []);
   return (
     <>
+      <Header />
       <Wrapper>
-        <Header />
         <ContentBox>
           <LeftContentBox>
             <AboutMe />

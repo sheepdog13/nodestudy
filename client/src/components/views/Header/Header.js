@@ -9,6 +9,8 @@ import { asynsLogout } from "../../../_reducers/user";
 import { toggleDarkMode } from "../../../_reducers/darkmode";
 
 const Wapper = styled.div`
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 64px;
   display: flex;
@@ -18,11 +20,16 @@ const Wapper = styled.div`
   align-items: center;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.textColor};
+  z-index: 999;
 `;
 
 const Burger = styled.label`
   @media (min-width: 820px) {
     display: none;
+  }
+  @media (max-width: 400px) {
+    width: 25px;
+    height: 18px;
   }
   position: relative;
   width: 30px;
@@ -57,6 +64,10 @@ const Burger = styled.label`
     transform: rotate(-45deg);
     top: 22px;
     left: 5px;
+    @media (max-width: 400px) {
+      top: 18px;
+      left: 5px;
+    }
   }
 `;
 
@@ -83,6 +94,10 @@ const Logo = styled.img`
     height: 30px;
     margin-top: 0;
   }
+  @media (max-width: 400px) {
+    width: 70px;
+    height: 25px;
+  }
   margin-top: 8px;
   width: 120px;
   height: 40px;
@@ -90,6 +105,11 @@ const Logo = styled.img`
 `;
 
 const RightBox = styled.div`
+  @media (max-width: 400px) {
+    svg {
+      font-size: 25px;
+    }
+  }
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -97,6 +117,10 @@ const RightBox = styled.div`
 `;
 
 const LoginBtn = styled.button`
+  @media (max-width: 400px) {
+    font-size: 14px;
+    padding: 2px 10px;
+  }
   border: 0 solid;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;

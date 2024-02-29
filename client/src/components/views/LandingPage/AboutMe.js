@@ -6,6 +6,9 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 
 const Wrapper = styled.div`
+  @media (max-width: 400px) {
+    padding: 10px;
+  }
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -19,6 +22,9 @@ const Wrapper = styled.div`
 const Title = styled.div`
   @media (max-width: 820px) {
     font-size: 15px;
+  }
+  @media (max-width: 400px) {
+    font-size: 12px;
   }
   display: flex;
   font-size: 18px;
@@ -35,6 +41,9 @@ const ProfileBox = styled.div`
     width: 30%;
     gap: 12px;
   }
+  @media (max-width: 400px) {
+    gap: 8px;
+  }
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -48,6 +57,11 @@ const ProfileImg = styled.img`
     width: 120px;
     height: 120px;
   }
+  @media (max-width: 400px) {
+    width: 80px;
+    height: 80px;
+    margin-top: 5px;
+  }
   width: 180px;
   height: 180px;
   margin-top: 15px;
@@ -58,6 +72,9 @@ const ProfileImg = styled.img`
 const ProfileName = styled.div`
   @media (max-width: 820px) {
     font-size: 18px;
+  }
+  @media (max-width: 400px) {
+    font-size: 15px;
   }
   display: flex;
   font-size: 20px;
@@ -76,6 +93,9 @@ const ProfileDesc = styled.div`
   @media (max-width: 820px) {
     font-size: 13px;
   }
+  @media (max-width: 400px) {
+    display: none;
+  }
   font-size: 15px;
   color: #d9d9d9;
   opacity: 0.7;
@@ -85,6 +105,9 @@ const IconBox = styled.div`
   @media (max-width: 820px) {
     gap: 15px;
   }
+  @media (max-width: 400px) {
+    gap: 10px;
+  }
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -92,6 +115,9 @@ const IconBox = styled.div`
   svg {
     @media (max-width: 820px) {
       font-size: 25px;
+    }
+    @media (max-width: 400px) {
+      font-size: 20px;
     }
     font-size: 30px;
     &:hover {
@@ -112,6 +138,9 @@ const IntroBox = styled.div`
 `;
 
 const IntroTite = styled.div`
+  @media (max-width: 400px) {
+    font-size: 20px;
+  }
   font-size: 30px;
   text-align: center;
   line-height: 1.3;
@@ -119,6 +148,9 @@ const IntroTite = styled.div`
 `;
 
 const IntroDesc = styled.div`
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
   text-align: center;
   line-height: 1.5;
   font-size: 20px;
