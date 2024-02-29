@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import MarkdownRender from "../../common/MarkdownRender";
 import Comment from "../../common/Comment";
+import MetaTag from "../../common/MetaTag";
 
 const Wrapper = styled.div`
   @media (max-width: 400px) {
@@ -85,7 +86,6 @@ function PostPage() {
         const parsedMarkdown = fm(response.data);
         setMarkdownContent(parsedMarkdown.body);
         setMarkdownData(parsedMarkdown.attributes);
-        document.title = parsedMarkdown.attributes.title;
       } catch (err) {
         console.log("err", err);
       }
@@ -95,6 +95,12 @@ function PostPage() {
 
   return (
     <>
+      <MetaTag
+        type="posting"
+        title={markdownData?.title}
+        desc={markdownData?.title}
+        img={markdownData?.imgpath}
+      />
       <Header />
       <Wrapper>
         <Preview>

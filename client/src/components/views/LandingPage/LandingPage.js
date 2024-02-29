@@ -5,6 +5,7 @@ import styled from "styled-components";
 import AboutMe from "./AboutMe";
 import PostCard from "./PostCard";
 import axios from "axios";
+import MetaTag from "../../common/MetaTag";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -67,6 +68,7 @@ function LandingPage() {
   }, []);
   return (
     <>
+      <MetaTag />
       <Header />
       <Wrapper>
         <ContentBox>

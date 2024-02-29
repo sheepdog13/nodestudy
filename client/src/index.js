@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
+import { HelmetProvider } from "react-helmet-async";
 
 const queryCient = new QueryClient();
 
@@ -15,7 +16,9 @@ root.render(
   <Provider store={store}>
     <QueryClientProvider client={queryCient}>
       <BrowserRouter>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </Provider>
