@@ -111,7 +111,7 @@ function PostPage() {
         <ContentBox>
           <MarkdownRender markdownContent={markdownContent} />
         </ContentBox>
-        <Comment />
+        {markdownData && <Comment />}
       </Wrapper>
     </>
   );
