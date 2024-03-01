@@ -18,7 +18,7 @@ function MetaTag(props) {
         property="og:description"
         content="자바스크립트를 주로 다루는 기술 블로그입니다."
       />
-      <meta property="og:image" content="%PUBLIC_URL%/img/bond.webp" />
+      <meta property="og:image" content="/img/bond.webp" />
       <meta property="og:url" content="https://sheepdog13.blog" />
     </Helmet>
   ) : (
@@ -30,7 +30,8 @@ function MetaTag(props) {
       <meta property="og:title" content={title} />
       <meta property="og:site_name" content={title} />
       <meta property="og:description" content={desc} />
-      <meta property="og:image" content={`%PUBLIC_URL%${img}`} />
+      <meta property="og:image" content={`${img}`} />
+      <meta property="og:url" content={window.location.href} />
     </Helmet>
   );
 }

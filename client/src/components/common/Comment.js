@@ -20,7 +20,6 @@ function Comment() {
         inputPosition="bottom"
         theme={theme}
         lang="ko"
-        loading="lazy"
       />
     </>
   );
