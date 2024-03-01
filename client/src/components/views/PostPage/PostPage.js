@@ -92,7 +92,7 @@ function PostPage() {
     };
     getMarkdown(failename);
   }, [failename]);
-
+  console.log(failename);
   return (
     <>
       <MetaTag
@@ -100,6 +100,7 @@ function PostPage() {
         title={markdownData?.title}
         desc={markdownData?.title}
         img={markdownData?.imgpath}
+        url={failename}
       />
       <Header />
       <Wrapper>
