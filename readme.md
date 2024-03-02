@@ -24,3 +24,17 @@
 
 ## 2. 아키텍처
 <img width="1000" alt="스크린샷 2024-03-02 오후 5 34 09" src="https://github.com/sheepdog13/sheepdog.blog/assets/112137282/5c0635f2-3039-42b5-a121-4f999e6311b9">
+
+<br>
+
+## 3. 기능설명
+
+### jwt 로그인
+
+<img width="1000" alt="스크린샷 2024-03-02 오후 8 52 36" src="https://github.com/sheepdog13/sheepdog.blog/assets/112137282/b96bf98d-13dd-49d4-9aaf-d8d1081faf3c">
+
+- access토큰은 body로 보내고 refresh토큰은 cookie에 저장
+- access토큰이 유효하지 않을때 cookie의 refresh토큰과 db의 refresh토큰 비교후
+- access토큰, refresh토큰 재발급
+
+
