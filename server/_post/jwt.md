@@ -10,11 +10,11 @@ imgpath: "/img/jwt/cover.png"
 
 JWT(JSON Web Token)란 인증에 필요한 정보들을 암호화시킨 JSON 토큰을 의미한다.
 
-[jwt](../img/jwt/1.png)
+![jwt](../img/jwt/1.png)
 
 ## JWT 구조
 
-[jwt](../img/jwt/2.png)
+![jwt](../img/jwt/2.png)
 
 위가 jwt 토큰의 모습이다 토큰은. 을 기준으로 세 부분으로 나누어져 있다
 
@@ -24,13 +24,13 @@ JWT(JSON Web Token)란 인증에 필요한 정보들을 암호화시킨 JSON �
 
 ## JWT 토큰을 가지고 있을때 인증 과정
 
-[jwt](../img/jwt/3.png)
+![jwt](../img/jwt/3.png)
 
 jwt 토큰을 발급 받을때만 DB를 거치고 그다음의 인증요청때는 서버만 거치기 때문에 jwt 로그인 방식은 다른 로그인 방식보다 빠르다
 
 ## AccessToken, RefreshToken
 
-[jwt](../img/jwt/4.png)
+![jwt](../img/jwt/4.png)
 
 지금 블로그의 로그인 방식 입니다.
 
