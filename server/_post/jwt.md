@@ -1,7 +1,7 @@
 ---
 date: "2024-03-02"
 title: "JWT 이란? (Access Token & Refresh Token)"
-imgpath: "/img/ramen/cover.jpg"
+imgpath: "/img/jwt/cover.png"
 ---
 
 # JWT 이란? (Access Token & Refresh Token)
