@@ -1,12 +1,12 @@
 ---
 date: "2024-03-02"
-title: "JWT 이란? (Access Token & Refresh Token)"
+title: "JWT 란? (Access Token & Refresh Token)"
 imgpath: "/img/jwt/cover.png"
 ---
 
-# JWT 이란? (Access Token & Refresh Token)
+# JWT 란? (Access Token & Refresh Token)
 
-## JWT (JSON Web Token) 이란?
+## JWT (JSON Web Token) 란?
 
 JWT(JSON Web Token)란 인증에 필요한 정보들을 암호화시킨 JSON 토큰을 의미한다.
 
