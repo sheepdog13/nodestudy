@@ -59,8 +59,8 @@ const Wrapper = styled.div`
     }
   }
   img {
+    border-radius: 20px;
     width: 100%;
-    margin: 25px 0px;
   }
 `;
 

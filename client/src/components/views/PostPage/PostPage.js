@@ -68,6 +68,7 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+  margin-bottom: 50px;
   gap: 15px;
 `;
 
@@ -92,7 +93,6 @@ function PostPage() {
     };
     getMarkdown(failename);
   }, [failename]);
-  console.log(failename);
   return (
     <>
       <MetaTag
