@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm i && npm install pm2@latest -g && babel ./ --ignore node_modules -d build && cp -r _post build/",
-    "start": "pm2 start build/index.js",
+    "start": "pm2-runtime start build/index.js",
     "backend": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run backend\" \"cd ../client && npm run start\""
