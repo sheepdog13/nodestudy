@@ -71,7 +71,7 @@ userSchema.methods.generateToken = async function () {
   var user = this;
   // jsonwebtoken을 이용해서 token을 생성하기
   var accesstoken = jwt.sign({ username: user.name }, SecretKey, {
-    expiresIn: "5m",
+    expiresIn: "1h",
   });
   var refreshtoken = jwt.sign(user._id.toHexString(), SecretKey);
   // refreshtoken을 db에 저장한다.

@@ -36,9 +36,7 @@ jwt 토큰을 발급 받을때만 DB를 거치고 그다음의 인증요청때�
 
 서버에서 access토큰은 body로 보내고 refresh토큰은 cookie에 저장했습니다
 
-access 토큰은 header에 고정해서 api요청을 할때마다 같이 보내고 유효 시간은 5분으로 설정(5분뒤 요청을 보내면 refresh 토큰으로 다시 access 토큰을 발급 받아야 합니다)
-
-![jwt](../img/jwt/5.jpeg)
+access 토큰은 header에 고정해서 api요청을 할때마다 같이 보내고 유효 시간은 1시간으로 설정(1시간뒤 요청을 보내면 refresh 토큰으로 다시 access 토큰을 발급 받아야 합니다)
 
 ```js
 const httpClientForCredentials = axios.create({
@@ -56,9 +54,11 @@ refresh토큰은 유효 시간을 2주로 설정하고 access토큰이 유효하
 
 ## 백과 프론트가 도메인이 다를때 쿠키 주고 받기
 
+![jwt](../img/jwt/5.png)
+
 도메인은 지금 블로그 url중 sheepdog13.blog부분 입니다.
 
-제 블로그는 서버는 [render](render.com) PaaS(Platform as a Service) 서비스로 배포 하고, 프론트는 aws cloudfront를 이용해서 서로 도메인이 다릅니다. 도메인이 다를때 쿠키를 교환할려면
+제 블로그는 서버는 [render](https://render.com) PaaS(Platform as a Service) 서비스로 배포 하고, 프론트는 aws cloudfront를 이용해서 서로 도메인이 다릅니다. 도메인이 다를때 쿠키를 교환할려면
 
 1. https 설정을 해야합니다.
 2. cookie 속성중 하나인 sameSite 속성을 none으로 설정해야 합니다.
@@ -98,3 +98,13 @@ res.cookie("refreshtoken", userdata.token, options).status(200).json({
 ```
 
 cors설정은 볼륨이 많이 질 거 같아서 다음 포스팅 때 정리하겠습니다.
+
+### git issue
+
+- [accesstoken, refreshtoken으로 로그인 구현](https://github.com/sheepdog13/sheepdog.blog/issues/26)
+
+### 참고자료
+
+- [프론트에서-안전하게-로그인-처리하기](https://velog.io/@yaytomato/프론트에서-안전하게-로그인-처리하기)
+- [Access-Token-Refresh-Token-원리-feat-JWT](https://inpa.tistory.com/entry/WEB-📚-Access-Token-Refresh-Token-원리-feat-JWT)
+- [https://jeleedev.tistory.com/174](https://jeleedev.tistory.com/174)

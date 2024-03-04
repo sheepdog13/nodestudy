@@ -36,6 +36,10 @@ const Wrapper = styled.div`
     line-height: 2;
   }
   h1 {
+    @media (max-width: 400px) {
+      font-size: 28px;
+      line-height: 1.4;
+    }
     font-size: 36px;
     line-height: 1.2;
     font-weight: 500;
@@ -53,6 +57,28 @@ const Wrapper = styled.div`
     margin-top: 80px;
     margin-bottom: 40px;
   }
+  h3 {
+    @media (max-width: 400px) {
+      font-size: 17px;
+      line-height: 1.4;
+      margin-top: 15px;
+    }
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 500;
+    margin-top: 30px;
+  }
+  a {
+    font-size: 16px;
+    color: #7fcde1;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:visited {
+      color: #7fcde1;
+    }
+  }
   pre {
     @media (max-width: 400px) {
       margin-top: 15px;
@@ -66,32 +92,33 @@ const Wrapper = styled.div`
 
 function MarkdownRender(props) {
   const { markdownContent } = props;
+  const renderers = {
+    a: ({ children, href }) => (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    ),
+    code: ({ node, inline, className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || "");
+      return !inline && match ? (
+        <StyledCodeBlock
+          {...props}
+          style={vscDarkPlus}
+          language={match[1]}
+          PreTag="div"
+        >
+          {String(children).replace(/\n$/, "")}
+        </StyledCodeBlock>
+      ) : (
+        <code {...props} className={className}>
+          {children}
+        </code>
+      );
+    },
+  };
   return (
     <Wrapper>
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{
-          code({ node, inline, className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || "");
-            return !inline && match ? (
-              // !inline && match 조건에 맞으면 하이라이팅
-              <StyledCodeBlock
-                {...props}
-                style={vscDarkPlus}
-                language={match[1]}
-                PreTag="div"
-              >
-                {String(children).replace(/\n$/, "")}
-              </StyledCodeBlock>
-            ) : (
-              // 안 맞다면 문자열 형태로 반환
-              <code {...props} className={className}>
-                {children}
-              </code>
-            );
-          },
-        }}
-      >
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={renderers}>
         {markdownContent}
       </ReactMarkdown>
     </Wrapper>
