@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import fm from "front-matter";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import MarkdownRender from "../../common/MarkdownRender";
 import Comment from "../../common/Comment";
 import MetaTag from "../../common/MetaTag";
+import { customAxios } from "../../../api/customAxios";
 
 const Wrapper = styled.div`
   @media (max-width: 400px) {
@@ -81,9 +81,7 @@ function PostPage() {
   useEffect(() => {
     const getMarkdown = async (failename) => {
       try {
-        const response = await axios.get(
-          `https://nodestudy-34u2.onrender.com/post/${failename}`
-        );
+        const response = await customAxios.get(`/post/${failename}`);
         const parsedMarkdown = fm(response.data);
         setMarkdownContent(parsedMarkdown.body);
         setMarkdownData(parsedMarkdown.attributes);

@@ -4,8 +4,8 @@ import Header from "../Header/Header";
 import styled from "styled-components";
 import AboutMe from "./AboutMe";
 import PostCard from "./PostCard";
-import axios from "axios";
 import MetaTag from "../../common/MetaTag";
+import { customAxios } from "../../../api/customAxios";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -58,9 +58,7 @@ function LandingPage() {
   useEffect(() => {
     const getMarkdown = async () => {
       try {
-        const response = await axios.get(
-          "https://nodestudy-34u2.onrender.com/allmarkdown"
-        );
+        const response = await customAxios.get("/allmarkdown");
         setPostArray(response.data);
       } catch (err) {
         console.log("err", err);
